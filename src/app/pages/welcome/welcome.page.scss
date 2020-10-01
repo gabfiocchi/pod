@@ -1,0 +1,42 @@
+:host {
+    ion-grid {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+    }
+    ion-row.header {
+        background: url("/assets/images/logo-welcome-background.png") repeat-x top center;
+        background-size: contain;
+        flex: 1;
+        .logo {
+            display: block;
+            margin: 26px auto 40px;
+            height: 260px;
+            width: 260px;
+        }
+    }
+    ion-row.content {
+        align-self: flex-end;
+        flex: 2;
+        width: 100%;
+    }
+    .pod-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 14px;
+        line-height: 22px;
+        margin: 0 auto 16px;
+        max-width: 266px;
+    }
+    ion-button {
+        margin-bottom: 18px;
+        margin-left: 28px;
+        margin-right: 28px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

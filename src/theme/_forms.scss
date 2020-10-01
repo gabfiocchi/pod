@@ -1,0 +1,29 @@
+.pod-form {
+    margin-left: 28px;
+    margin-right: 28px;
+
+    ion-list {
+        margin-bottom: 24px;
+        ion-item {
+            border: 1px solid #e6e6e6;
+            box-sizing: border-box;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            padding: 8px;
+            --padding-start: 0;
+            --padding-end: 0;
+            --inner-padding-end: 0;
+        }
+        ion-button.button-disabled {
+            --background: #9a8eda;
+            --opacity: 1;
+            border-radius: 10px;
+            height: 46px;
+            margin: 0 10px 0 0;
+            width: 46px;
+        }
+        ion-input {
+            --padding-start: 10px !important;
+        }
+    }
+}

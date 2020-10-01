@@ -1,0 +1,42 @@
+<ion-content fullscreen>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="header">
+      <ion-col class="ion-self-align-center ion-self-justify-center">
+        <img class="logo" src="/assets/images/user-logo.png" alt="pod">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h2 class="pod-title">Creá tu cuenta</h2>
+        <p>
+          Registrate y comenzá a utilizar nuestra aplicación
+        </p>
+        <form class="pod-form">
+          <ion-list lines="none">
+            <ion-item>
+              <ion-button disabled slot="start">
+                <ion-icon slot="icon-only" src="/assets/icons/ic_user.svg"></ion-icon>
+              </ion-button>
+              <ion-input placeholder="Usuario"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-button disabled slot="start">
+                <ion-icon slot="icon-only" src="/assets/icons/ic_mail.svg"></ion-icon>
+              </ion-button>
+              <ion-input placeholder="Email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-button disabled slot="start">
+                <ion-icon slot="icon-only" src="/assets/icons/ic_password.svg"></ion-icon>
+              </ion-button>
+              <ion-input placeholder="Password"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-button class="ion-text-uppercase" expand="block" mode="ios">
+            Siguiente
+          </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
