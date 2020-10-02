@@ -1,0 +1,38 @@
+ion-menu {
+    --width: 280px;
+    --side-min-width: 280px;
+    --side-max-width: 280px;
+    &::part(container) {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        overflow: hidden;
+    }
+    ion-content {
+        --background: linear-gradient(180deg, #871dff 0%, #614ad9 50%) !important;
+        --padding-top: 40px !important;
+    }
+    .logo {
+        height: 50px;
+        margin-left: 24px;
+        width: 50px;
+    }
+    ion-list {
+        --ion-item-background: transparent !important;
+        padding-top: 36px !important;
+        &:last-child {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            width: 100%;
+        }
+    }
+    ion-item {
+        --ion-color-dark: transparent !important;
+        --padding-start: 24px !important;
+        --padding-end: 24px !important;
+        ion-icon {
+            margin-right: 16px;
+        }
+    }
+}
