@@ -1,0 +1,65 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo" src="/assets/images/logo-dark.png" alt="pod">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- image profile -->
+  <div class="is-public">
+    <ion-label>Perfil Público:</ion-label>
+    <ion-toggle mode="ios" slot="end" color="success" checked></ion-toggle>
+  </div>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label color="medium">
+          Nombre
+        </ion-label>
+        <ion-input value="Sebastian Mayo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="medium">
+          Empresa
+        </ion-label>
+        <ion-input value="Orbit Software"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="medium">
+          Cargo
+        </ion-label>
+        <ion-input value="CEO & Co-Founder"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="medium">
+          Ubicación
+        </ion-label>
+        <ion-input class="ion-text-wrap" value="Buenos Aires, Argentina"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="medium">
+          Usuario
+        </ion-label>
+        <ion-input value="smayo04"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label color="medium">
+          Sobre mi
+        </ion-label>
+      </ion-item>
+      <ion-textarea placeholder="Escribí sobre tu historia..."></ion-textarea>
+    </ion-card-content>
+  </ion-card>
+  <ion-label>
+    Cuando tu perfil es publico, cualquier persona podrá acceder a tu perfil entrando en este link:
+  </ion-label>
+</ion-content>
