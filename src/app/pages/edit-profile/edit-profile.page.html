@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar mode="ios">
     <ion-buttons>
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
@@ -11,6 +11,16 @@
 
 <ion-content>
   <!-- image profile -->
+  <div class="image-picture">
+    <div class="image">
+      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    </div>
+    <ion-fab>
+      <ion-fab-button color="danger" size="small">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
   <div class="is-public">
     <ion-label>Perfil Público:</ion-label>
     <ion-toggle mode="ios" slot="end" color="success" checked></ion-toggle>
@@ -59,7 +69,43 @@
       <ion-textarea placeholder="Escribí sobre tu historia..."></ion-textarea>
     </ion-card-content>
   </ion-card>
-  <ion-label>
-    Cuando tu perfil es publico, cualquier persona podrá acceder a tu perfil entrando en este link:
+  <ion-label class="sharing-profile">
+    <p>
+      Cuando tu perfil es publico, cualquier persona podrá acceder a tu perfil entrando en este link:
+    </p>
+    <p>
+      mypod.ar/smayo04
+    </p>
   </ion-label>
+  <ion-list class="links ion-margin">
+    <ion-item lines="none" *ngFor="let item of [0,1,2,3]">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>+5491132676018</ion-label>
+      <ion-button fill="clear" slot="end" color="dark">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-button class="add" expand="block" color="medium" mode="ios">
+      <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+      Agregar link
+    </ion-button>
+  </ion-list>
+  <!-- TODO: Move to component -->
+  <div class="bottom-bar">
+    <ion-fab vertical="top" horizontal="center">
+      <ion-fab-button>
+        <ion-icon src="/assets/icons/wifi.svg"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div class="buttons">
+      <ion-button fill="clear" color="primary">
+        <ion-icon slot="icon-only" src="/assets/icons/ic_user.svg"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" src="/assets/icons/contact.svg"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
