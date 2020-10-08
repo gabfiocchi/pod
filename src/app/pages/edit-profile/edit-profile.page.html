@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar mode="ios">
+  <ion-toolbar class="with-logo" mode="ios">
     <ion-buttons>
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
@@ -92,20 +92,5 @@
       Agregar link
     </ion-button>
   </ion-list>
-  <!-- TODO: Move to component -->
-  <div class="bottom-bar">
-    <ion-fab vertical="top" horizontal="center">
-      <ion-fab-button>
-        <ion-icon src="/assets/icons/wifi.svg"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-    <div class="buttons">
-      <ion-button fill="clear" color="primary">
-        <ion-icon slot="icon-only" src="/assets/icons/ic_user.svg"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" src="/assets/icons/contact.svg"></ion-icon>
-      </ion-button>
-    </div>
-  </div>
+  <app-bottom-bar></app-bottom-bar>
 </ion-content>

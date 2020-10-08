@@ -4,18 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { ScanPodPageRoutingModule } from './scan-pod-routing.module';
 
-import { HomePage } from './home.page';
+import { ScanPodPage } from './scan-pod.page';
 import { BottomBarModule } from '../../components/bottom-bar/bottom-bar.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    ScanPodPageRoutingModule,
     BottomBarModule
   ],
-  declarations: [HomePage]
+  declarations: [ScanPodPage]
 })
-export class HomePageModule {}
+export class ScanPodPageModule {}

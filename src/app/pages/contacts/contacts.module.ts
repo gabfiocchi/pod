@@ -4,18 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { ContactsPageRoutingModule } from './contacts-routing.module';
 
-import { HomePage } from './home.page';
+import { ContactsPage } from './contacts.page';
 import { BottomBarModule } from '../../components/bottom-bar/bottom-bar.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    ContactsPageRoutingModule,
     BottomBarModule
   ],
-  declarations: [HomePage]
+  declarations: [ContactsPage]
 })
-export class HomePageModule {}
+export class ContactsPageModule {}

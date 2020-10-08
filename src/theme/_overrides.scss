@@ -1,0 +1,13 @@
+.searchbar-input-container.sc-ion-searchbar-ios {
+    border: 1px solid #eaecef;
+    border-radius: var(--border-radius);
+    height: 40px;
+}
+.searchbar-search-icon.sc-ion-searchbar-ios {
+    color: #b8bbc6 !important;
+    left: 16px;
+    width: 16px;
+}
+.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
+    padding-left: 40px;
+}

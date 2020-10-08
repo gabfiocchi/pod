@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="with-logo" color="transparent" mode="ios">
+    <ion-buttons>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo" src="/assets/images/logo-white.png" alt="pod">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h2 class="pod-title">Contactos</h2>
+        <div class="ion-margin-horizontal">
+          <ion-searchbar color="light" class="ion-text-left" mode="ios" placeholder="Buscar"></ion-searchbar>
+        </div>
+        <ion-list class="profiles ion-margin">
+          <ion-item lines="none" *ngFor="let item of [0,1,2,3]" detail>
+            <ion-avatar slot="start">
+              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-avatar>
+            <ion-label>
+              <h2>Carolina Dubiansky</h2>
+              <p>CEO - Giver Solutions</p>
+              <p class="location">
+                <ion-icon name="location-outline"></ion-icon> Buenos Aires
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-bottom-bar></app-bottom-bar>
+</ion-content>

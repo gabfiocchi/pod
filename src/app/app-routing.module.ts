@@ -30,6 +30,22 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'contacts',
+    loadChildren: () => import('./pages/contacts/contacts.module').then( m => m.ContactsPageModule)
+  },
+  {
+    path: 'contact-profile',
+    loadChildren: () => import('./pages/contact-profile/contact-profile.module').then( m => m.ContactProfilePageModule)
+  },
+  {
+    path: 'active-pod',
+    loadChildren: () => import('./pages/active-pod/active-pod.module').then( m => m.ActivePodPageModule)
+  },
+  {
+    path: 'scan-pod',
+    loadChildren: () => import('./pages/scan-pod/scan-pod.module').then( m => m.ScanPodPageModule)
   }
 ];
 
