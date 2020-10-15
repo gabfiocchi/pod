@@ -8,10 +8,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
@@ -36,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/contacts/contacts.module').then( m => m.ContactsPageModule)
   },
   {
-    path: 'contact-profile',
+    path: 'contact-profile/:username',
     loadChildren: () => import('./pages/contact-profile/contact-profile.module').then( m => m.ContactProfilePageModule)
   },
   {

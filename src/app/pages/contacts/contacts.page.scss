@@ -5,6 +5,12 @@
 
     .pod-title {
         color: #ffffff;
+        margin-bottom: 4px;
+    }
+    .filter-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     ion-searchbar {
@@ -13,6 +19,7 @@
         --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         --placeholder-color: #b8bbc6 !important;
         --placeholder-opacity: 1;
+        padding: 0 10px 0 0;
     }
 
     ion-list.profiles {

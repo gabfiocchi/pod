@@ -1,10 +1,57 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>contact-profile</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="with-logo" color="transparent" mode="ios">
+    <ion-buttons>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo" src="/assets/images/logo-white.png" alt="pod">
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content fullscreen>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-list class="profile ion-margin">
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-avatar>
+            <ion-label>
+              <h2>Carolina Dubiansky</h2>
+              <p>CEO - Giver Solutions</p>
+              <p class="location">
+                <ion-icon name="location-outline"></ion-icon> Buenos Aires
+              </p>
+            </ion-label>
+            <ion-fab-button color="light" size="small" slot="end">
+              <ion-icon name="share-social"></ion-icon>
+            </ion-fab-button>
+          </ion-item>
+        </ion-list>
+        <ion-card class="links">
+          <ion-card-content>
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col size="4">
+                  <div class="link active">
+                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                    <p>Contactos</p>
+                  </div>
+                </ion-col>
+                <ion-col size="4" *ngFor="let item of [1,2,2,2,2,2]">
+                  <div class="link">
+                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                    <p>Contactos</p>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <app-bottom-bar></app-bottom-bar>
 </ion-content>

@@ -14,11 +14,14 @@
     <ion-row>
       <ion-col class="ion-text-center">
         <h2 class="pod-title">Contactos</h2>
-        <div class="ion-margin-horizontal">
+        <div class="ion-margin-horizontal filter-bar">
           <ion-searchbar color="light" class="ion-text-left" mode="ios" placeholder="Buscar"></ion-searchbar>
+          <ion-fab-button size="small">
+            <ion-icon name="filter"></ion-icon>
+          </ion-fab-button>
         </div>
         <ion-list class="profiles ion-margin">
-          <ion-item lines="none" *ngFor="let item of [0,1,2,3]" detail>
+          <ion-item lines="none" *ngFor="let item of [0,1,2,3]" detail routerLink="/contact-profile/demo">
             <ion-avatar slot="start">
               <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
             </ion-avatar>
