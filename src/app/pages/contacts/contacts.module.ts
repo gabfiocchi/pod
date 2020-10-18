@@ -8,6 +8,7 @@ import { ContactsPageRoutingModule } from './contacts-routing.module';
 
 import { ContactsPage } from './contacts.page';
 import { BottomBarModule } from '../../components/bottom-bar/bottom-bar.module';
+import { FilterModalModule } from '../../components/filter-modal/filter-modal.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { BottomBarModule } from '../../components/bottom-bar/bottom-bar.module';
     FormsModule,
     IonicModule,
     ContactsPageRoutingModule,
-    BottomBarModule
+    BottomBarModule,
+    FilterModalModule
   ],
   declarations: [ContactsPage]
 })

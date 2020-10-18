@@ -11,15 +11,23 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
 
-    ion-searchbar {
-        --border-radius: 20px;
-        --background: #ffffff;
-        --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        --placeholder-color: #b8bbc6 !important;
-        --placeholder-opacity: 1;
-        padding: 0 10px 0 0;
+        ion-searchbar {
+            --border-radius: 20px;
+            --background: #ffffff;
+            --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            --placeholder-color: #b8bbc6 !important;
+            --placeholder-opacity: 1;
+            padding: 0 10px 0 0;
+        }
+
+        ion-button {
+            --border-radius: 100%;
+            --padding-start: 8px;
+            --padding-end: 8px;
+            height: 40px;
+            width: 40px;
+        }
     }
 
     ion-list.profiles {

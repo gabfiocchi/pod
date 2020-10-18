@@ -1,0 +1,25 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="closeModal('close')">Cerrar</ion-button>
+    </ion-buttons>
+    <ion-title>Filtros</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal('apply', active)">Listo</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header class="ion-text-uppercase" mode="md">
+      Ordenar por
+    </ion-list-header>
+    <ion-radio-group allow-empty-selection="true" [value]="active" (ionChange)="updateValue($event.detail.value)">
+      <ion-item *ngFor="let option of options" mode="ios">
+        <ion-label>{{ option.label }}</ion-label>
+        <ion-radio slot="end" [value]="option.value"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>

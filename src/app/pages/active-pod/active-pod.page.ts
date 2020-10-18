@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-active-pod',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivePodPage implements OnInit {
 
-  constructor() { }
+  isScan: boolean;
+  constructor(
+    private route: Router
+  ) { }
 
   ngOnInit() {
+    this.isScan = this.route.url === '/scan-pod';
   }
 
 }

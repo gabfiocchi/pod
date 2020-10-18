@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ScanPodPage } from './scan-pod.page';
+import { FilterModalComponent } from './filter-modal.component';
 
-describe('ScanPodPage', () => {
-  let component: ScanPodPage;
-  let fixture: ComponentFixture<ScanPodPage>;
+describe('FilterModalComponent', () => {
+  let component: FilterModalComponent;
+  let fixture: ComponentFixture<FilterModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScanPodPage ],
+      declarations: [ FilterModalComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ScanPodPage);
+    fixture = TestBed.createComponent(FilterModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

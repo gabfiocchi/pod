@@ -1,8 +1,13 @@
 ion-toolbar.with-logo {
     display: flex;
     height: 70px;
+    padding-top: calc(var(--ion-safe-area-top, 0) + 10px) !important;
     .logo {
+        align-self: center;
+        display: flex;
         height: 50px;
+        justify-content: center;
+        margin: auto;
         width: 50px;
     }
 }
