@@ -97,6 +97,7 @@
         }
         ion-button.add {
             --border-radius: 18px;
+            height: 30px;
             margin: 20px auto 140px;
             margin-bottom: 140px;
             margin-bottom: calc(env(safe-area-inset-bottom) + 140px);

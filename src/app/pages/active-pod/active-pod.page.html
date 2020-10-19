@@ -4,15 +4,17 @@
     <img class="phone" src="/assets/images/phone.svg" alt="">
     <img class="logo" src="/assets/images/podlogo.svg" alt="">
   </div>
+  <ion-back-button defaultHref="/" text="" icon="arrow-back"></ion-back-button>
   <div class="footer">
-    <ion-label>
+    <ion-label *ngIf="!isScan">
       <p>
         Tu <span>pod</span> se va a activar con la cuenta que iniciaste sesión
       </p>
     </ion-label>
     <ion-button class="active">
       <ion-icon slot="start" src="/assets/icons/wifi.svg"></ion-icon>
-      Presioná para activar
+
+      {{ isScan ? 'Presioná para escanear' : 'Presioná para activar' }}
     </ion-button>
   </div>
 </ion-content>

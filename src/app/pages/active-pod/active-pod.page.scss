@@ -5,6 +5,13 @@
             background-size: contain;
         }
     }
+    ion-back-button {
+        position: absolute;
+        top: 48px;
+        left: 30px;
+        z-index: 1;
+        color: white;
+    }
     .illustration {
         display: flex;
         flex-direction: column;

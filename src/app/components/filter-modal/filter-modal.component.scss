@@ -1,0 +1,17 @@
+:host {
+    ion-list-header {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 20px;
+        text-transform: uppercase;
+
+        color: #b8bbc6;
+    }
+
+    ion-item:last-child {
+        --border-width: 0;
+        --inner-border-width: 0;
+    }
+}
