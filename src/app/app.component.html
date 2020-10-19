@@ -43,7 +43,7 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item lines="none" detail="false" color="dark" routerLink="/welcome">
+            <ion-item lines="none" detail="false" color="dark" routerLink="/welcome" (click)="signOut()">
               <ion-icon color="light" slot="start" src="/assets/icons/log-out.svg"></ion-icon>
               <ion-label>Salir</ion-label>
             </ion-item>
