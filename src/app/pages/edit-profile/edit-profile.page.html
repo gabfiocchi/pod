@@ -23,7 +23,7 @@
   </div>
   <div class="is-public">
     <ion-label>Perfil Público:</ion-label>
-    <ion-toggle mode="ios" slot="end" color="success" checked></ion-toggle>
+    <ion-toggle mode="ios" slot="end" color="success" [checked]="user?.private"></ion-toggle>
   </div>
   <ion-card>
     <ion-card-content>
@@ -31,31 +31,31 @@
         <ion-label color="medium">
           Nombre
         </ion-label>
-        <ion-input value="Sebastian Mayo"></ion-input>
+        <ion-input [value]="userFullName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Empresa
         </ion-label>
-        <ion-input value="Orbit Software"></ion-input>
+        <ion-input [value]="user?.company"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Cargo
         </ion-label>
-        <ion-input value="CEO & Co-Founder"></ion-input>
+        <ion-input [value]="user?.job_position"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Ubicación
         </ion-label>
-        <ion-input class="ion-text-wrap" value="Buenos Aires, Argentina"></ion-input>
+        <ion-input class="ion-text-wrap" [value]="user?.location"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Usuario
         </ion-label>
-        <ion-input value="smayo04"></ion-input>
+        <ion-input [value]="user?.username"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -66,23 +66,23 @@
           Sobre mi
         </ion-label>
       </ion-item>
-      <ion-textarea placeholder="Escribí sobre tu historia..."></ion-textarea>
+      <ion-textarea placeholder="Escribí sobre tu historia..." [value]="user?.bio"></ion-textarea>
     </ion-card-content>
   </ion-card>
-  <ion-label class="sharing-profile">
+  <ion-label class="sharing-profile" *ngIf="user">
     <p>
       Cuando tu perfil es publico, cualquier persona podrá acceder a tu perfil entrando en este link:
     </p>
     <p>
-      mypod.ar/smayo04
+      mypod.ar/{{user?.username}}
     </p>
   </ion-label>
   <ion-list class="links ion-margin">
-    <ion-item lines="none" *ngFor="let item of [0,1,2,3]">
+    <ion-item lines="none" *ngFor="let item of user?.links">
       <ion-avatar slot="start">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        <img [src]="item.link.image?.data?.full_url">
       </ion-avatar>
-      <ion-label>+5491132676018</ion-label>
+      <ion-label>{{item.value}}</ion-label>
       <ion-button fill="clear" slot="end" color="dark">
         <ion-icon slot="icon-only" name="close-outline"></ion-icon>
       </ion-button>

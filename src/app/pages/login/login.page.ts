@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private toastController: ToastController,
-    private usersServices: UsersService,
+    private usersService: UsersService,
     private navController: NavController
   ) { }
 
@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
   private buildForm(): void {
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.pattern(VALIDATORS_REGEX.EMAIL)]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
+      password: [null, [Validators.required, Validators.minLength(5)]],
     });
   }
 
@@ -47,7 +47,12 @@ export class LoginPage implements OnInit {
     await loader.present();
 
     try {
-      await this.usersServices.signInWithEmail(this.loginForm.value);
+      const { data } = await this.usersService.signInWithEmail(this.loginForm.value);
+      const userData = await this.usersService.getProfile(this.loginForm.value.email);
+
+      console.log('data', data)
+      this.usersService.user = userData.data;
+      this.usersService.token = data.token;
       this.navController.setDirection('root');
       this.router.navigateByUrl('/home');
     } catch (error) {

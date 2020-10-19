@@ -52,11 +52,15 @@ export class RegisterPage implements OnInit {
     await loader.present();
 
     const { username, ...user } = this.registerForm.value;
-    console.log('a', username, user)
-    try {
-      await this.usersService.signUpWithEmail(user);
-      const userData = await this.usersService.signInWithEmail(user);
 
+    try {
+      await this.usersService.signUpWithEmail(this.registerForm.value);
+      const { data } = await this.usersService.signInWithEmail(user);
+      const userData = await this.usersService.getProfile(user.email);
+      console.log('data token', data.token);
+      console.log('data userData', userData);
+      this.usersService.user = userData.data;
+      this.usersService.token = data.token;
 
       console.log('userData', userData)
       this.successSignUp();

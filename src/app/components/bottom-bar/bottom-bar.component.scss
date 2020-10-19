@@ -11,6 +11,7 @@
         padding-bottom: calc(env(safe-area-inset-bottom));
         position: fixed;
         right: 0;
+        z-index: 10;
         ion-fab {
             top: 0;
             transform: translate3d(0, -50%, 0);
