@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { ModalQrComponent } from '../../components/modal-qr/modal-qr.component';
 import { UsersService } from '../../services/users.service';
 
