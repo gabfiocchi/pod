@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BottomBarComponent } from './bottom-bar.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { ModalScanModule } from '../modal-scan/modal-scan.module';
 
 @NgModule({
   declarations: [BottomBarComponent],
@@ -10,7 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    IonicModule
+    IonicModule,
+    ModalScanModule
   ]
 })
 export class BottomBarModule { }

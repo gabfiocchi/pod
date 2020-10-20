@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { LoadingController, ModalController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { UsersService } from './services/users.service';
 import { Storage } from '@ionic/storage';
 import { STORAGE_LOCATIONS } from '../environments/environment';
+import { ModalScanComponent } from './components/modal-scan/modal-scan.component';
 
 @Component({
   selector: 'app-root',
@@ -20,13 +21,15 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private storage: Storage,
     private usersService: UsersService,
+    private modalController: ModalController,
+    private loadingController: LoadingController,
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.styleBlackOpaque();
       this.splashScreen.hide();
     });
   }
@@ -42,11 +45,18 @@ export class AppComponent implements OnInit {
     console.log('hasToken', hasToken);
 
     if (hasToken) {
-      const dataMe = await this.usersService.getMeProfile();
-      console.log('dataMe', dataMe.data.email);
-      const { data } = await this.usersService.getProfile(dataMe.data.email);
-      console.log('data', data)
-      this.usersService.user = data;
+      const loader = await this.loadingController.create();
+      await loader.present();
+      try {
+        const dataMe = await this.usersService.getMeProfile();
+        console.log('dataMe', dataMe.data.email);
+        const { data } = await this.usersService.getProfile(dataMe.data.email);
+        console.log('data', data)
+        this.usersService.user = data;
+      } catch (error) {
+
+      }
+      await loader.dismiss();
     };
 
     this.usersService.user$.subscribe(async user => {
@@ -56,5 +66,13 @@ export class AppComponent implements OnInit {
 
   async signOut() {
     await this.usersService.signOut();
+  }
+
+  async scanPod() {
+    const modal = await this.modalController.create({
+      component: ModalScanComponent,
+      cssClass: 'bottom-sheet',
+    });
+    await modal.present();
   }
 }

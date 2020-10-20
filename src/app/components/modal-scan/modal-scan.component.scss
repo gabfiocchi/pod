@@ -1,0 +1,13 @@
+:host {
+    ion-content::part(scroll) {
+        overflow: hidden;
+    }
+    .nfc {
+        width: 120px;
+        margin: 10px auto 24px;
+    }
+    ion-button.close {
+        --ion-color-light: #d4d3d9 !important;
+        margin: 24px 20px 40px;
+    }
+}

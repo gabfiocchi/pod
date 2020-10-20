@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalScanComponent } from '../modal-scan/modal-scan.component';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -7,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BottomBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalController: ModalController,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  async scanPod() {
+    const modal = await this.modalController.create({
+      component: ModalScanComponent,
+      cssClass: 'bottom-sheet',
+    });
+    await modal.present();
+  }
 
 }

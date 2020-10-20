@@ -6,8 +6,8 @@
     <ion-title>
       <img class="logo" src="/assets/images/logo-white.png" alt="pod">
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
+    <ion-buttons *ngIf="user && user.qr" slot="end">
+      <ion-button (click)="openQR()">
         <ion-icon color="light" slot="icon-only" src="/assets/icons/qr.svg"></ion-icon>
       </ion-button>
     </ion-buttons>
