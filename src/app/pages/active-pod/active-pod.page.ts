@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Ndef, NFC } from '@ionic-native/nfc/ngx';
 @Component({
   selector: 'app-active-pod',
   templateUrl: './active-pod.page.html',
   styleUrls: ['./active-pod.page.scss'],
 })
 export class ActivePodPage implements OnInit {
-
-  isScan: boolean;
   constructor(
-    private route: Router
+    private route: Router,
+    private nfc: NFC,
+    private ndef: Ndef
   ) { }
 
   ngOnInit() {
-    this.isScan = this.route.url === '/scan-pod';
+  }
+
+  scanTag() {
+    console.log('scanTag');
   }
 
 }

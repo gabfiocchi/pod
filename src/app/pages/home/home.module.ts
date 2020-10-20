@@ -8,13 +8,15 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { BottomBarModule } from '../../components/bottom-bar/bottom-bar.module';
+import { ModalQrModule } from '../../components/modal-qr/modal-qr.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    BottomBarModule
+    BottomBarModule,
+    ModalQrModule
   ],
   declarations: [HomePage]
 })

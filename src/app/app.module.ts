@@ -6,12 +6,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -30,6 +30,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   providers: [
     StatusBar,
     SplashScreen,
+    NFC,
+    Ndef,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

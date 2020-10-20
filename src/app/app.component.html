@@ -23,7 +23,7 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item lines="none" detail="false" color="dark" routerLink="/scan-pod">
+            <ion-item lines="none" detail="false" color="dark" (click)="scanPod()">
               <ion-icon color="light" slot="start" src="/assets/icons/wifi.svg"></ion-icon>
               <ion-label>Escaneá un <b>pod</b></ion-label>
             </ion-item>

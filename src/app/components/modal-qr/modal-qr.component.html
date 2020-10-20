@@ -1,0 +1,15 @@
+<ion-content class="ion-text-center" scrollY="false">
+  <ion-button class="action" color="medium" fill="clear" (click)="closeModal()">
+    <ion-icon name="close-circle-sharp" slot="icon-only"></ion-icon>
+  </ion-button>
+  <h2>
+    Código QR
+  </h2>
+  <p>
+    Escaneá este código QR con cualquier cámara para compartir tu perfil.
+  </p>
+  <img class="qr" [src]="parentUser.qr.data.full_url">
+  <p>
+    Si tenés la <b>app de pod</b>, {{ parentUser?.username }} se agregará a tu lista de contactos.
+  </p>
+</ion-content>

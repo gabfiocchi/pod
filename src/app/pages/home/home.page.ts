@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { ModalController } from '@ionic/angular';
+import { ModalQrComponent } from '../../components/modal-qr/modal-qr.component';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,7 @@ export class HomePage implements OnInit {
   userFullName: string;
   constructor(
     private usersService: UsersService,
+    private modalController: ModalController,
   ) { }
 
   ngOnInit() {
@@ -21,4 +24,14 @@ export class HomePage implements OnInit {
     });
   }
 
+  async openQR() {
+    const modal = await this.modalController.create({
+      component: ModalQrComponent,
+      componentProps: {
+        parentUser: this.user
+      },
+      cssClass: 'bottom-sheet',
+    });
+    await modal.present();
+  }
 }

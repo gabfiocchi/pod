@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterModalComponent } from './filter-modal.component';
 import { IonicModule } from '@ionic/angular';
 
-
+import { ModalQrComponent } from './modal-qr.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
   ],
   declarations: [
-    FilterModalComponent
-  ],
+    ModalQrComponent
+  ]
 })
-export class FilterModalModule { }
+export class ModalQrModule { }

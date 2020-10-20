@@ -6,15 +6,17 @@
   </div>
   <ion-back-button defaultHref="/" text="" icon="arrow-back"></ion-back-button>
   <div class="footer">
-    <ion-label *ngIf="!isScan">
+    <ion-label>
       <p>
         Tu <span>pod</span> se va a activar con la cuenta que iniciaste sesión
       </p>
     </ion-label>
-    <ion-button class="active">
+    <ion-button class="active" (click)="scanTag()" mode="ios">
       <ion-icon slot="start" src="/assets/icons/wifi.svg"></ion-icon>
 
-      {{ isScan ? 'Presioná para escanear' : 'Presioná para activar' }}
+      <ion-label>
+        Presioná para activar
+      </ion-label>
     </ion-button>
   </div>
 </ion-content>

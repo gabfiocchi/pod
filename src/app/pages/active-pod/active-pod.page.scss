@@ -18,6 +18,7 @@
         position: relative;
         .background {
             height: 374px;
+            margin: auto;
             margin-top: -52px;
             width: 374px;
         }
@@ -63,11 +64,18 @@
             }
         }
         ion-button.active {
-            --border-radius: 18px;
+            --border-radius: 22px;
+            font-weight: bold;
+            height: 42px;
             margin: 20px auto;
-            // margin-bottom: 140px;
-            // margin-bottom: calc(env(safe-area-inset-bottom) + 140px);
-            max-width: 260px;
+            width: 280px;
+            ion-icon {
+                font-size: 34px;
+                margin-right: 0;
+            }
+            ion-label {
+                margin: auto;
+            }
         }
     }
 }
