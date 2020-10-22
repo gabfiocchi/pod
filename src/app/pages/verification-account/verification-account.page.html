@@ -1,0 +1,40 @@
+<ion-content fullscreen>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="header">
+      <ion-col class="ion-self-align-center ion-self-justify-center">
+        <img class="logo" src="/assets/images/user-logo.png" alt="pod">
+      </ion-col>
+    </ion-row>
+    <ion-row class="content">
+      <ion-col class="ion-text-center">
+        <h2 class="pod-title">Código Verificación</h2>
+        <p>
+          Ingresá el código de verificacion que
+          enviamos a tu mail
+        </p>
+        <code-input class="pin" [code]="code" [isCodeHidden]="false" [isNonDigitsCode]="false" [codeLength]="4"
+          (codeCompleted)="onCodeCompleted($event)">
+        </code-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class="footer">
+      <ion-col class="actions">
+        <!-- A donde debería ir el back? -->
+        <ion-button color="dark">
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="medium" class="ion-text-uppercase next" expand="block" mode="ios">
+          Siguiente
+        </ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>
+          ¿No recibiste el código?
+          <ion-button color="secondary" mode="ios" fill="clear">
+            Reenviar
+          </ion-button>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

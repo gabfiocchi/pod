@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'scan-pod',
     loadChildren: () => import('./pages/active-pod/active-pod.module').then(m => m.ActivePodPageModule)
+  },
+  {
+    path: 'verification-account',
+    loadChildren: () => import('./pages/verification-account/verification-account.module').then( m => m.VerificationAccountPageModule)
   }
 ];
 
