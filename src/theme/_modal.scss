@@ -4,6 +4,29 @@ ion-modal.bottom-sheet {
     align-items: flex-end;
     padding: 8px;
     padding-bottom: calc(var(--ion-safe-area-bottom) + 8px);
+
+    &.auto-height {
+        --height: 100%;
+        --background: transparent;
+        --border-radius: 0;
+        .ion-page {
+            justify-content: flex-end;
+        }
+        .bottom-sheet-backdrop {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 0;
+        }
+        .bottom-sheet-container {
+            background: #fff;
+            border-radius: 30px;
+            position: relative;
+            z-index: 1;
+        }
+    }
     ion-button.action {
         position: absolute;
         top: 0;

@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
   async openLinkEditor() {
     const modal = await this.modalController.create({
       component: ModalEditLinkComponent,
-      cssClass: 'bottom-sheet',
+      cssClass: ['bottom-sheet', 'auto-height'],
     });
     await modal.present();
   }

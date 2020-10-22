@@ -53,8 +53,8 @@ export class LoginPage implements OnInit {
       console.log('data', data)
       this.usersService.user = userData.data;
       this.usersService.token = data.token;
-      this.navController.setDirection('root');
-      this.router.navigateByUrl('/home');
+      // this.navController.setDirection('root');
+      this.router.navigateByUrl('/verification-account');
     } catch (error) {
       this.showToast(error.error.error);
     }

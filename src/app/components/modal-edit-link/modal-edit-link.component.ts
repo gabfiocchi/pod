@@ -7,7 +7,6 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal-edit-link.component.scss'],
 })
 export class ModalEditLinkComponent implements OnInit {
-
   @Input() parentLink: any;
   constructor(
     private modalController: ModalController,

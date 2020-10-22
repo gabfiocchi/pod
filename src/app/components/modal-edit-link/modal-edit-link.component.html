@@ -1,4 +1,6 @@
-<ion-content class="ion-text-center ion-padding" scrollY="false">
+<div class="bottom-sheet-backdrop" (click)="closeModal()">
+</div>
+<div class="bottom-sheet-container ion-text-center ion-padding">
   <ion-button class="action" color="medium" fill="clear" (click)="closeModal()">
     <ion-icon name="close-circle-sharp" slot="icon-only"></ion-icon>
   </ion-button>
@@ -28,4 +30,4 @@
   <ion-button mode="ios" expand="block" size="large">
     GUARDAR
   </ion-button>
-</ion-content>
+</div>
