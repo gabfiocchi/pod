@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ModalScanComponent } from './modal-scan.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ModalScanComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class ModalScanModule { }

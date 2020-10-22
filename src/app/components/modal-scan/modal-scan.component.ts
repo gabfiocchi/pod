@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { NFC } from '@ionic-native/nfc/ngx';
 import { Subscription } from 'rxjs';
+import { ModalScanStatusComponent } from '../modal-scan-status/modal-scan-status.component';
 @Component({
   selector: 'app-modal-scan',
   templateUrl: './modal-scan.component.html',
@@ -19,7 +20,6 @@ export class ModalScanComponent implements OnInit {
 
   ionViewWillEnter() {
     this.platform.ready().then(() => {
-      console.log('hola!');
       this.scanTag();
     });
   }
@@ -36,11 +36,9 @@ export class ModalScanComponent implements OnInit {
         let payload = tag.ndefMessage[0].payload;
         let tagContent = this.nfc.bytesToString(payload);
         console.log('tagContent', tagContent)
-        alert('Pod válido');
-        this.closeModal();
+        this.showStatusModal('success');
       } else {
-        alert('Pod inválido');
-        // si no tiene mensaje, le decimos que es inválido.
+        this.showStatusModal('error');
       }
       this.subscriptionNFC.unsubscribe();
     });
@@ -55,5 +53,17 @@ export class ModalScanComponent implements OnInit {
 
   closeModal() {
     this.modalController.dismiss();
+  }
+
+  async showStatusModal(status) {
+    this.closeModal();
+
+    const modal = await this.modalController.create({
+      component: ModalScanStatusComponent,
+      componentProps: {
+        parentStatus: status
+      }
+    });
+    await modal.present();
   }
 }
