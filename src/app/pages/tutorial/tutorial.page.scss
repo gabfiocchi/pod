@@ -1,0 +1,29 @@
+:host {
+    ion-content {
+        &::part(background) {
+            background: #fff url("/assets/images/background-small-solid.png") repeat-x top center;
+            background-position-y: -44px;
+            background-size: contain;
+        }
+    }
+    ion-back-button {
+        margin-left: 30px;
+    }
+    ion-grid {
+        display: flex;
+        height: calc(100% - 180px);
+        flex-direction: column;
+        margin-top: 180px;
+    }
+    ion-row {
+        flex: 1;
+    }
+    .pod-title {
+        color: #fff;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        margin-top: 0;
+    }
+}
