@@ -4,6 +4,7 @@ import { BottomBarComponent } from './bottom-bar.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { ModalScanModule } from '../modal-scan/modal-scan.module';
+import { ModalScanStatusModule } from '../modal-scan-status/modal-scan-status.module';
 
 @NgModule({
   declarations: [BottomBarComponent],
@@ -12,7 +13,8 @@ import { ModalScanModule } from '../modal-scan/modal-scan.module';
     CommonModule,
     RouterModule,
     IonicModule,
-    ModalScanModule
+    ModalScanModule,
+    ModalScanStatusModule
   ]
 })
 export class BottomBarModule { }

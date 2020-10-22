@@ -1,0 +1,35 @@
+<ion-content class="ion-text-center" scrollY="false" fullscreen>
+  <div class="illustration">
+    <div class="header" *ngIf="parentStatus === 'success'">
+      <h3>¡Listo!</h3>
+      <h2>
+        Escaneado con éxito!
+      </h2>
+    </div>
+
+
+    <div class="header" *ngIf="parentStatus === 'error'">
+      <h3>¡Error!</h3>
+      <h2>
+        No pudimos reconocer el POD...
+      </h2>
+    </div>
+    <img *ngIf="parentStatus === 'success'" class="icon" src="/assets/icons/pod-check.svg">
+    <img *ngIf="parentStatus === 'error'" class="icon" src="/assets/icons/pod-error.svg">
+    <img class="logo" src="/assets/images/podlogo.svg">
+    <img class="background" src="/assets/images/podbackground.svg">
+    <div class="footer">
+      <ion-button color="light" class="active" mode="ios">
+        <ion-icon slot="start" src="/assets/icons/wifi.svg"></ion-icon>
+
+        <ion-label>
+          Presioná para activar
+        </ion-label>
+      </ion-button>
+
+      <ion-button color="light" fill="clear" (click)="closeModal()">
+        Salir
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
