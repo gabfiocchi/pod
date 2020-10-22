@@ -20,7 +20,7 @@ export class ModalScanComponent implements OnInit {
 
   ionViewWillEnter() {
     this.platform.ready().then(() => {
-      this.scanTag();
+      // this.scanTag();
     });
   }
 

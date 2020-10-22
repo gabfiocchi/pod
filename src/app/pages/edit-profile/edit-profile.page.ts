@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalEditLinkComponent } from 'src/app/components/modal-edit-link/modal-edit-link.component';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -11,6 +13,7 @@ export class EditProfilePage implements OnInit {
   user: any;
   userFullName: string;
   constructor(
+    private modalController: ModalController,
     private usersService: UsersService,
   ) { }
 
@@ -20,5 +23,11 @@ export class EditProfilePage implements OnInit {
       this.userFullName = ((value?.first_name || '') + ' ' + (value?.last_name || '')).trim();
     });
   }
-
+  async openLinkEditor() {
+    const modal = await this.modalController.create({
+      component: ModalEditLinkComponent,
+      cssClass: 'bottom-sheet',
+    });
+    await modal.present();
+  }
 }
