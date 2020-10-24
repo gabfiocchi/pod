@@ -56,7 +56,7 @@ export class RegisterPage implements OnInit {
     try {
       await this.usersService.signUpWithEmail(this.registerForm.value);
       const { data } = await this.usersService.signInWithEmail(user);
-      const userData = await this.usersService.getProfile(user.email);
+      const userData = await this.usersService.getProfile();
       console.log('data token', data.token);
       console.log('data userData', userData);
       this.usersService.user = userData.data;
@@ -78,7 +78,8 @@ export class RegisterPage implements OnInit {
     });
 
     await successToast.present();
-    this.navController.setDirection('root');
-    this.router.navigateByUrl('/home');
+    // this.navController.setDirection('root');
+    // this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/verification-account');
   }
 }

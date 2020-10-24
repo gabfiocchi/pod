@@ -20,7 +20,7 @@
     <ion-row class="footer">
       <ion-col class="actions">
         <!-- A donde debería ir el back? -->
-        <ion-button color="dark">
+        <ion-button color="dark" mode="ios">
           <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
         </ion-button>
         <ion-button color="medium" class="ion-text-uppercase next" expand="block" mode="ios">
@@ -30,7 +30,7 @@
       <ion-col size="12">
         <ion-label>
           ¿No recibiste el código?
-          <ion-button color="secondary" mode="ios" fill="clear">
+          <ion-button color="secondary" mode="ios" fill="clear" (click)="resendCode()">
             Reenviar
           </ion-button>
         </ion-label>

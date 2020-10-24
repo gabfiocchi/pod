@@ -13,12 +13,12 @@ export const environment = {
     requestPassword: '/auth/password/request',
     resetPassword: '/auth/password/reset',
     refreshToken: '/auth/refresh',
+    requestCode: '/custom/verification/code/request',
+    verifyCode: '/custom/verification/code/verify',
     me: '/users/me',
     invite: '/users/invite',
     users: '/users',
     user: '/items/users',
-    // Recibe las keys de la apirest para comprar la request.
-    cacheURLs: [],
     ttl: 1440 * 15,
   },
 };
@@ -29,7 +29,9 @@ export const VALIDATORS_REGEX = {
 
 export const STORAGE_LOCATIONS = {
   USER_SESSION: 'user_session',
-  REFRESH_TOKEN: 'session_expired'
+  REFRESH_TOKEN: 'session_expired',
+  TEMP_EMAIL: 'temp_email',
+  TEMP_PASS: 'temp_pass'
 };
 
 // https://docs.directus.io/api/errors.html
@@ -41,7 +43,7 @@ export const ERROR_CODES = {
   100: 'Ups! Las credenciales son inválidas.',
   101: 'Ups! Las credenciales son inválidas.',
   102: 'Ups! La sesión ha expirado.',
-  103: 'Ups! El usuario está inactivo.',
+  103: 'La cuenta está pendiente de verificación.',
   104: 'Ups! El enlace es inválido.',
   105: 'Ups! El enlace ha expirado, debes solicitar uno nuevo.',
   106: 'Ups! El usuario no existe.',

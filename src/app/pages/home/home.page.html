@@ -24,7 +24,7 @@
               <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
             </ion-avatar>
             <ion-label *ngIf="user">
-              <h2>{{ userFullName }}</h2>
+              <h2>{{ user?.first_name || user?.username }}</h2>
               <p>{{ user?.job_position }} - {{ user?.company }}</p>
               <p class="location">
                 <ion-icon name="location-outline"></ion-icon> {{ user?.location }}
@@ -39,7 +39,7 @@
             <ion-label>
               <b>POD</b>s
             </ion-label>
-            <ion-button fill="outline" slot="end">205</ion-button>
+            <ion-button fill="outline" slot="end">{{ user?.total_scans }}</ion-button>
           </ion-item>
         </ion-list>
 

@@ -25,48 +25,48 @@
     <ion-label>Perfil Público:</ion-label>
     <ion-toggle mode="ios" slot="end" color="success" [checked]="user?.private"></ion-toggle>
   </div>
-  <ion-card>
+  <ion-card *ngIf="user">
     <ion-card-content>
       <ion-item>
         <ion-label color="medium">
-          Nombre
+          Nombre {{ user?.first_name }}
         </ion-label>
-        <ion-input [value]="userFullName"></ion-input>
+        <ion-input [(ngModel)]="user.first_name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Empresa
         </ion-label>
-        <ion-input [value]="user?.company"></ion-input>
+        <ion-input [(ngModel)]="user.company"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Cargo
         </ion-label>
-        <ion-input [value]="user?.job_position"></ion-input>
+        <ion-input [(ngModel)]="user.job_position"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Ubicación
         </ion-label>
-        <ion-input class="ion-text-wrap" [value]="user?.location"></ion-input>
+        <ion-input class="ion-text-wrap" [(ngModel)]="user.location"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="medium">
           Usuario
         </ion-label>
-        <ion-input [value]="user?.username"></ion-input>
+        <ion-input [(ngModel)]="user.username"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="user">
     <ion-card-content>
       <ion-item lines="none">
         <ion-label color="medium">
           Sobre mi
         </ion-label>
       </ion-item>
-      <ion-textarea placeholder="Escribí sobre tu historia..." [value]="user?.bio"></ion-textarea>
+      <ion-textarea placeholder="Escribí sobre tu historia..." [(ngModel)]="user.bio"></ion-textarea>
     </ion-card-content>
   </ion-card>
   <ion-label class="sharing-profile" *ngIf="user">

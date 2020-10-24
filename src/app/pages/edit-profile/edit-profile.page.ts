@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { ModalEditLinkComponent } from 'src/app/components/modal-edit-link/modal-edit-link.component';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -11,8 +11,9 @@ import { UsersService } from 'src/app/services/users.service';
 export class EditProfilePage implements OnInit {
 
   user: any;
-  userFullName: string;
+  // TODO: Update to formgroup.
   constructor(
+    private loadingController: LoadingController,
     private modalController: ModalController,
     private usersService: UsersService,
   ) { }
@@ -20,9 +21,10 @@ export class EditProfilePage implements OnInit {
   ngOnInit() {
     this.usersService.user$.subscribe(value => {
       this.user = value;
-      this.userFullName = ((value?.first_name || '') + ' ' + (value?.last_name || '')).trim();
+      console.log('user', value);
     });
   }
+
   async openLinkEditor() {
     const modal = await this.modalController.create({
       component: ModalEditLinkComponent,
@@ -30,4 +32,18 @@ export class EditProfilePage implements OnInit {
     });
     await modal.present();
   }
+
+  async updateProfile() {
+    const loader = await this.loadingController.create();
+    loader.present();
+
+    try {
+      const response = await this.usersService.updateProfile(this.user.id, this.user);
+      console.log('response', response);
+    } catch (error) {
+      console.log('error', error);
+    }
+    loader.dismiss();
+  }
+  update() {}
 }

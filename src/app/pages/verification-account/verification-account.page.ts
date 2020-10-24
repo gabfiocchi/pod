@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { UsersService } from 'src/app/services/users.service';
+import { STORAGE_LOCATIONS } from '../../../environments/environment';
 
 @Component({
   selector: 'app-verification-account',
@@ -17,9 +19,15 @@ export class VerificationAccountPage implements OnInit {
     private loadingController: LoadingController,
     private toastController: ToastController,
     private usersService: UsersService,
+    private storage: Storage,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const hasEmail = await this.storage.get(STORAGE_LOCATIONS.TEMP_EMAIL);
+    if (!hasEmail) {
+      this.navController.setDirection('root');
+      this.router.navigateByUrl('/login');
+    }
   }
 
   // this called only if user entered full code
@@ -28,18 +36,22 @@ export class VerificationAccountPage implements OnInit {
     const loader = await this.loadingController.create();
     await loader.present();
     try {
-      const dataMe = await this.usersService.getMeProfile();
-      const { data } = await this.usersService.getProfile(dataMe.data.email);
-      if (data.verification_code === code.toString()) {
-        this.navController.setDirection('root');
-        this.router.navigateByUrl('/home');
-      } else {
-        // 
-        this.showToast('El código no es válido', 'danger');
-        this.code = null;
-      }
-    } catch (error) {
+      const tempEmail = await this.storage.get(STORAGE_LOCATIONS.TEMP_EMAIL);
+      const tempPassword = await this.storage.get(STORAGE_LOCATIONS.TEMP_PASS);
+      await this.usersService.verifyVerificationCode(tempEmail, code);
 
+      const { data } = await this.usersService.signInWithEmail({ email: tempEmail, password: tempPassword });
+      const userData = await this.usersService.getProfile();
+
+      await this.storage.remove(STORAGE_LOCATIONS.TEMP_EMAIL);
+      await this.storage.remove(STORAGE_LOCATIONS.TEMP_PASS);
+
+      this.usersService.user = userData.data;
+      this.usersService.token = data.token;
+
+      this.router.navigateByUrl('/tutorial', { replaceUrl: true });
+    } catch (error) {
+      this.showToast(error.error.error.message, 'danger');
     }
     await loader.dismiss();
   }
@@ -56,5 +68,17 @@ export class VerificationAccountPage implements OnInit {
     });
 
     toast.present();
+  }
+
+  async resendCode() {
+    const loader = await this.loadingController.create();
+    await loader.present();
+    try {
+      const tempEmail = await this.storage.get(STORAGE_LOCATIONS.TEMP_EMAIL);
+      await this.usersService.requestVerificationCode(tempEmail);
+    } catch (error) {
+      console.log('resendCode error', error)
+    }
+    await loader.dismiss();
   }
 }
