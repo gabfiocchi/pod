@@ -24,10 +24,10 @@
               <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
             </ion-avatar>
             <ion-label *ngIf="user">
-              <h2>{{ user?.first_name || user?.username }}</h2>
-              <p>{{ user?.job_position }} - {{ user?.company }}</p>
-              <p class="location">
-                <ion-icon name="location-outline"></ion-icon> {{ user?.location }}
+              <h2>{{ user.first_name || user.username }}</h2>
+              <p>{{ user.job_position }} - {{ user.company }}</p>
+              <p class="location" *ngIf="user.location">
+                <ion-icon name="location-outline"></ion-icon> {{ user.location }}
               </p>
             </ion-label>
             <ion-button class="action ion-align-self-end" color="dark" fill="outline" slot="end"
@@ -54,18 +54,18 @@
             <ion-card-content>
               <ion-grid class="ion-no-padding">
                 <ion-row>
-                  <ion-col size="4">
+                  <!-- <ion-col size="4">
                     <div class="link desactive">
                       <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
                     </div>
-                  </ion-col>
+                  </ion-col> -->
                   <ion-col size="4" *ngFor="let item of user?.links">
-                    <div class="link">
+                    <a class="link" [href]="item.link.link + item.value" target="_blank">
                       <img [src]="item.link.image?.data?.full_url">
                       <div class="icon-wrapper">
                         <ion-icon color="success" slot="start" name="checkmark-circle"></ion-icon>
                       </div>
-                    </div>
+                    </a>
                   </ion-col>
                 </ion-row>
               </ion-grid>

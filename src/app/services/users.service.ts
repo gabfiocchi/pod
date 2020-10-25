@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
+const profileFields = '*,links.link.image.data,links.link.*,links.value,qr.data.*,friends.friend.*,friends.friend.links.link.image.data,friends.friend.links.link.*,friends.friend.links.value';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,12 +53,12 @@ export class UsersService {
     return this.http.post<any>(environment.apirest.base + environment.apirest.user, body).toPromise();
   }
 
-  getProfile() {
-    return this.http.get<any>(environment.apirest.base + environment.apirest.user + `?single=1&fields=*,links.link.image.data,links.link.*,links.value,qr.data.*`).toPromise();
+  getProfile() {    
+    return this.http.get<any>(environment.apirest.base + environment.apirest.user + `?single=1&fields=${profileFields}`).toPromise();
   }
 
   updateProfile(id, body) {
-    return this.http.patch<any>(environment.apirest.base + environment.apirest.user + `/${id}?single=1&fields=*,links.link.image.data,links.link.*,links.value,qr.data.*`, body).toPromise();
+    return this.http.patch<any>(environment.apirest.base + environment.apirest.user + `/${id}?single=1&fields=${profileFields}`, body).toPromise();
   }
 
 

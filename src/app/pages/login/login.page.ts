@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
       console.log('data', userData)
       this.usersService.user = userData.data;
       this.usersService.token = data.token;
-      // this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/home', { replaceUrl: true });
     } catch (error) {
       console.log('error', error.error.error.code);
       if (error.error.error.code === 103) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { UsersService } from 'src/app/services/users.service';
 import { ModalScanComponent } from '../modal-scan/modal-scan.component';
 
 @Component({
@@ -8,12 +9,19 @@ import { ModalScanComponent } from '../modal-scan/modal-scan.component';
   styleUrls: ['./bottom-bar.component.scss'],
 })
 export class BottomBarComponent implements OnInit {
-
+  user: any;
   constructor(
     private modalController: ModalController,
+    private usersService: UsersService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.usersService.user$.subscribe(value => {
+      if (value) {
+        this.user = value;
+      }
+    })
+  }
 
   async scanPod() {
     const modal = await this.modalController.create({
