@@ -18,7 +18,7 @@
     <img *ngIf="parentStatus === 'error'" class="icon" src="/assets/icons/pod-error.svg">
     <img class="logo" src="/assets/images/podlogo.svg">
     <img class="background" src="/assets/images/podbackground.svg">
-    <div class="footer">
+    <div class="footer" *ngIf="parentStatus === 'error'">
       <ion-button color="light" class="active" mode="ios">
         <ion-icon slot="start" src="/assets/icons/wifi.svg"></ion-icon>
 
