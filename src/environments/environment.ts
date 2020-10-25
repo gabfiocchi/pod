@@ -9,6 +9,7 @@ export const environment = {
     // public
 
     // user
+    colors: '/items/colors',
     login: '/auth/authenticate',
     requestPassword: '/auth/password/request',
     resetPassword: '/auth/password/reset',

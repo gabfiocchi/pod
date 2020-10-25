@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, ModalController } from '@ionic/angular';
-import { ModalEditLinkComponent } from 'src/app/components/modal-edit-link/modal-edit-link.component';
-import { UsersService } from 'src/app/services/users.service';
+import { LoadingController, ModalController, PopoverController } from '@ionic/angular';
+import { ModalEditLinkComponent } from '../../components/modal-edit-link/modal-edit-link.component';
+import { SelectColorsComponent } from '../../components/select-colors/select-colors.component';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,23 +12,31 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class EditProfilePage implements OnInit {
 
+  colors;
   user: any;
   userForm: FormGroup;
   constructor(
     private loadingController: LoadingController,
     private modalController: ModalController,
+    private popoverController: PopoverController,
     private usersService: UsersService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({});
+    this.getColors();
+
     this.usersService.user$.subscribe(value => {
       if (value) {
         this.user = value;
         this.buildForm(value);
       }
     });
+  }
+  private async getColors() {
+    const { data } = await this.usersService.profileColors();
+    this.colors = data;
   }
 
   private buildForm(user?): void {
@@ -62,7 +71,8 @@ export class EditProfilePage implements OnInit {
     loader.present();
 
     try {
-      await this.usersService.updateProfile(this.user.id, this.getChanged(this.userForm));
+      const { data } = await this.usersService.updateProfile(this.user.id, this.getChanged(this.userForm));
+      this.usersService.user = data;
     } catch (error) {
       console.log('error', error);
     }
@@ -85,5 +95,48 @@ export class EditProfilePage implements OnInit {
       });
 
     return dirtyValues;
+  }
+
+  getColorBackground() {
+    let primary: string, secondary: string;
+    if (this.user && this.user.color?.primary) {
+      primary = this.user.color.primary;
+      secondary = this.user.color.secondary || primary;
+      return { 'background': 'linear-gradient(315deg,' + primary + ' 0%,' + secondary + ' 100%)' }
+    }
+
+    if (this.colors && this.colors.length > 0) {
+      primary = this.colors[0].primary;
+      secondary = this.colors[0].secondary || primary;
+
+      return { 'background': 'linear-gradient(315deg,' + primary + ' 0%,' + secondary + ' 100%)' }
+    }
+  }
+  async presentColorSelect(ev) {
+    const popover = await this.popoverController.create({
+      component: SelectColorsComponent,
+      event: ev,
+      componentProps: { colors: this.colors }
+    });
+
+    await popover.present();
+    popover.onWillDismiss().then(async (color) => {
+      if (color.role === 'selected' && color.data.id !== this.user.color?.id) {
+        console.log('color', color.data.id);
+        const loader = await this.loadingController.create();
+        loader.present();
+
+        try {
+          const { data } = await this.usersService.updateProfile(this.user.id, {
+            color: color.data.id
+          });
+          this.user = data;
+          this.usersService.user = data;
+        } catch (error) {
+          console.log('error', error);
+        }
+        loader.dismiss();
+      }
+    });
   }
 }
