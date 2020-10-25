@@ -20,7 +20,8 @@
             </ion-avatar>
             <ion-label>
               <h2>{{ user.first_name || user.username }}</h2>
-              <p>{{ user.job_position }} - {{ user.company }}</p>
+              <p>{{ user.job_position }} <span *ngIf="user.job_position && user.company">-</span>
+                {{ user.company }}</p>
               <p class="location" *ngIf="user.location">
                 <ion-icon name="location-outline"></ion-icon> {{ user.location }}
               </p>
@@ -30,7 +31,7 @@
             </ion-fab-button>
           </ion-item>
         </ion-list>
-        <ion-card class="links" *ngIf="user">
+        <ion-card class="links" *ngIf="user && user.links.length > 0">
           <ion-card-content>
             <ion-grid class="ion-no-padding">
               <ion-row>

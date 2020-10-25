@@ -15,19 +15,22 @@
       <ion-col class="ion-text-center">
         <h2 class="pod-title">Contactos</h2>
         <div class="ion-margin-horizontal filter-bar">
-          <ion-searchbar color="light" class="ion-text-left" mode="ios" placeholder="Buscar"></ion-searchbar>
+          <ion-searchbar color="light" class="ion-text-left" mode="ios" placeholder="Buscar"
+            (ionInput)="filterList($event)"></ion-searchbar>
           <ion-button color="light" (click)="openFilters()" mode="ios">
             <ion-icon color="primary" slot="icon-only" name="filter"></ion-icon>
           </ion-button>
         </div>
         <ion-list class="profiles ion-margin">
-          <ion-item lines="none" *ngFor="let item of friends" detail routerLink="/contact-profile/{{item.friend.username}}">
+          <ion-item lines="none" *ngFor="let item of friends" detail
+            routerLink="/contact-profile/{{item.friend.username}}">
             <ion-avatar slot="start">
               <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
             </ion-avatar>
             <ion-label>
               <h2>{{ item.friend.first_name || item.friend.username }}</h2>
-              <p>{{ item.friend.job_position }} - {{ item.friend.company }}</p>
+              <p>{{ item.friend.job_position }} <span *ngIf="item.friend.job_position && item.friend.company">-</span>
+                {{ item.friend.company }}</p>
               <p class="location" *ngIf="item.friend.location">
                 <ion-icon name="location-outline"></ion-icon> {{ item.friend.location }}
               </p>
