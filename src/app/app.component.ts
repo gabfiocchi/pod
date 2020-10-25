@@ -48,9 +48,7 @@ export class AppComponent implements OnInit {
       const loader = await this.loadingController.create();
       await loader.present();
       try {
-        const dataMe = await this.usersService.getMeProfile();
-        console.log('dataMe', dataMe.data.email);
-        const { data } = await this.usersService.getProfile(dataMe.data.email);
+        const { data } = await this.usersService.getProfile();
         console.log('data', data)
         this.usersService.user = data;
       } catch (error) {

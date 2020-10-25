@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-contacts',
@@ -9,12 +10,22 @@ import { FilterModalComponent } from 'src/app/components/filter-modal/filter-mod
 })
 export class ContactsPage implements OnInit {
 
+  user: any;
   filterActive;
+  friends;
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private usersService: UsersService,
   ) { }
 
   ngOnInit() {
+    this.usersService.user$.subscribe(value => {
+      if (value) {
+        console.log('value', value.friends);
+        this.user = value;
+        this.friends = value.friends;
+      }
+    });
   }
   async openFilters() {
     const modal = await this.modalController.create({

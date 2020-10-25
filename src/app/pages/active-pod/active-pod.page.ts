@@ -37,9 +37,9 @@ export class ActivePodPage implements OnInit {
         let payload = tag.ndefMessage[0].payload;
         let tagContent = this.nfc.bytesToString(payload);
         console.log('tagContent', tagContent)
-        alert('Pod válido');
-      } else {
         alert('Pod inválido');
+      } else {
+        alert('Pod válido');
         // si no tiene mensaje, le decimos que es inválido.
       }
       try {

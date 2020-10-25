@@ -36,7 +36,6 @@
                     --border-radius: 18px;
                     min-width: 76px;
                     font-weight: bold;
-
                 }
             }
         }
@@ -94,7 +93,7 @@
         }
 
         ion-card-content {
-            padding: 16px 0;
+            padding: 16px;
         }
     }
     ion-button.add {
@@ -111,6 +110,15 @@
         flex-direction: column;
         justify-content: center;
         position: relative;
+        box-sizing: border-box;
+        text-decoration: none;
+
+        &:active,
+        &:hover {
+            border: 1px solid #d4d3d9;
+            border-radius: 5px;
+            margin: -1px;
+        }
 
         &.desactive {
             opacity: 0.3;

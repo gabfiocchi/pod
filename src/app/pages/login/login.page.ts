@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, ToastController, NavController } from '@ionic/angular';
-import { VALIDATORS_REGEX } from '../../../environments/environment';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { ERROR_CODES, VALIDATORS_REGEX, STORAGE_LOCATIONS } from '../../../environments/environment';
 import { UsersService } from '../../services/users.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +12,17 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  private toast: HTMLIonToastElement;
+  private showPassword: boolean;
   loginForm: FormGroup;
-  submitAttempt: boolean;
-  showPassword: boolean;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private toastController: ToastController,
     private usersService: UsersService,
-    private navController: NavController
+    private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -37,8 +38,7 @@ export class LoginPage implements OnInit {
 
 
   async onSubmit(): Promise<void> {
-    this.submitAttempt = true;
-
+    this.dismissToast();
     if (this.loginForm.invalid) {
       return;
     }
@@ -48,33 +48,56 @@ export class LoginPage implements OnInit {
 
     try {
       const { data } = await this.usersService.signInWithEmail(this.loginForm.value);
-      const userData = await this.usersService.getProfile(this.loginForm.value.email);
+      const userData = await this.usersService.getProfile();
 
       console.log('data', data)
+      console.log('data', userData)
       this.usersService.user = userData.data;
       this.usersService.token = data.token;
-      // this.navController.setDirection('root');
-      this.router.navigateByUrl('/verification-account');
+      this.router.navigateByUrl('/home', { replaceUrl: true });
     } catch (error) {
-      this.showToast(error.error.error);
+      console.log('error', error.error.error.code);
+      if (error.error.error.code === 103) {
+        await this.requestCode();
+      } else {
+        this.showToast(error.error.error, 'danger');
+      }
     }
 
     await loader.dismiss();
   }
-  async showToast(error) {
-    const toast = await this.toastController.create({
-      // message: ERROR_CODES[error.code],
-      message: 'Ups ha habido un error.',
+  async showToast(message, color?) {
+    console.log('error', message)
+    this.dismissToast();
+    this.toast = await this.toastController.create({
+      color,
+      message,
       buttons: [{
         text: 'Aceptar',
         role: 'cancel'
       }]
     });
 
-    toast.present();
+    this.toast.present();
+  }
+
+  private dismissToast() {
+    if (this.toast) {
+      this.toast.dismiss();
+    }
   }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+  async requestCode() {
+    try {
+      this.usersService.requestVerificationCode(this.loginForm.value.email);
+      await this.storage.set(STORAGE_LOCATIONS.TEMP_EMAIL, this.loginForm.value.email);
+      await this.storage.set(STORAGE_LOCATIONS.TEMP_PASS, this.loginForm.value.password);
+      this.router.navigateByUrl('/verification-account');
+    } catch (error) {
+      console.log('error', error);
+    }
   }
 }

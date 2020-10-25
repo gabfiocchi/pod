@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
+const profileFields = '*,links.link.image.data,links.link.*,links.value,qr.data.*,friends.friend.*,friends.friend.links.link.image.data,friends.friend.links.link.*,friends.friend.links.value';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,13 +53,14 @@ export class UsersService {
     return this.http.post<any>(environment.apirest.base + environment.apirest.user, body).toPromise();
   }
 
-  getMeProfile() {
-    return this.http.get<any>(environment.apirest.base + environment.apirest.me).toPromise();
+  getProfile() {    
+    return this.http.get<any>(environment.apirest.base + environment.apirest.user + `?single=1&fields=${profileFields}`).toPromise();
   }
 
-  getProfile(username: string) {
-    return this.http.get<any>(environment.apirest.base + environment.apirest.user + `?single=1&filter[email][eq]=${username}&fields=*,links.link.image.data,links.link.*,links.value,qr.data.*`).toPromise();
+  updateProfile(id, body) {
+    return this.http.patch<any>(environment.apirest.base + environment.apirest.user + `/${id}?single=1&fields=${profileFields}`, body).toPromise();
   }
+
 
   async refreshToken() {
     const token = await this.storage.get(STORAGE_LOCATIONS.USER_SESSION);
@@ -84,5 +86,12 @@ export class UsersService {
       this.router.navigateByUrl('/welcome');
       resolve(true);
     });
+  }
+
+  requestVerificationCode(email: string) {
+    return this.http.post(environment.apirest.base + environment.apirest.requestCode, { email }).toPromise();
+  }
+  verifyVerificationCode(email: string, verification_code: string) {
+    return this.http.post(environment.apirest.base + environment.apirest.verifyCode, { email, verification_code }).toPromise();
   }
 }

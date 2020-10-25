@@ -44,14 +44,17 @@
         }
         .link {
             align-items: center;
-            padding: 12px 18px 6px 18px;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: center;
-
-            &.active {
+            padding: 12px 18px 6px 18px;
+            text-decoration: none;
+            &:active,
+            &:hover {
                 border: 1px solid #d4d3d9;
                 border-radius: 5px;
+                margin: -1px;
             }
 
             p {

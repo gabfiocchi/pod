@@ -21,15 +21,15 @@
           </ion-button>
         </div>
         <ion-list class="profiles ion-margin">
-          <ion-item lines="none" *ngFor="let item of [0,1,2,3]" detail routerLink="/contact-profile/demo">
+          <ion-item lines="none" *ngFor="let item of friends" detail routerLink="/contact-profile/{{item.friend.username}}">
             <ion-avatar slot="start">
               <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
             </ion-avatar>
             <ion-label>
-              <h2>Carolina Dubiansky</h2>
-              <p>CEO - Giver Solutions</p>
-              <p class="location">
-                <ion-icon name="location-outline"></ion-icon> Buenos Aires
+              <h2>{{ item.friend.first_name || item.friend.username }}</h2>
+              <p>{{ item.friend.job_position }} - {{ item.friend.company }}</p>
+              <p class="location" *ngIf="item.friend.location">
+                <ion-icon name="location-outline"></ion-icon> {{ item.friend.location }}
               </p>
             </ion-label>
           </ion-item>
