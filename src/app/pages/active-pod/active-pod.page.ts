@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ndef, NFC } from '@ionic-native/nfc/ngx';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { ModalScanStatusComponent } from 'src/app/components/modal-scan-status/modal-scan-status.component';
+import { ModalScanComponent } from 'src/app/components/modal-scan/modal-scan.component';
+import { UsersService } from 'src/app/services/users.service';
 @Component({
   selector: 'app-active-pod',
   templateUrl: './active-pod.page.html',
@@ -10,20 +13,29 @@ import { Subscription } from 'rxjs';
 })
 export class ActivePodPage implements OnInit {
   subscriptionNFC: Subscription;
+  user: any;
   constructor(
+    private usersService: UsersService,
     private route: Router,
     private nfc: NFC,
     private ndef: Ndef,
     private loadingController: LoadingController,
+    private modalController: ModalController,
   ) { }
 
   ngOnInit() {
+    this.usersService.user$.subscribe(value => {
+      this.user = value;
+    });
   }
 
   async scanTag() {
     this.removeSubscription();
-    const loader = await this.loadingController.create();
-    await loader.present();
+    const modal = await this.modalController.create({
+      component: ModalScanComponent,
+      cssClass: 'bottom-sheet',
+    });
+    await modal.present();
     this.subscriptionNFC = this.nfc.addNdefListener().subscribe(async (nfcEvent) => {
       console.log('nfcEvent to write', nfcEvent)
       console.log(nfcEvent.tag);
@@ -35,25 +47,26 @@ export class ActivePodPage implements OnInit {
       if (tag.ndefMessage) {
         // si tiene mensaje, lo leemos y vemos que es.
         let payload = tag.ndefMessage[0].payload;
-        let tagContent = this.nfc.bytesToString(payload);
+        // let tagContent = this.nfc.bytesToString(payload);
+        let tagContent = this.ndef.uriHelper.decodePayload(payload);        ;
+        // TODO: Add logic valid pod.
         console.log('tagContent', tagContent)
-        alert('Pod inválido');
+        this.showStatusModal('success');
       } else {
-        alert('Pod válido');
+        this.showStatusModal('error');
         // si no tiene mensaje, le decimos que es inválido.
       }
       try {
         const write = await this.nfc.write([
           // Poner la ruta del usuario.
-          // pod.domain/u/{username}
-          this.ndef.uriRecord('https://pod-admin.gabfiocchi.dev/'),
+          // admin.pod.domain/u/{username}
+          this.ndef.uriRecord('https://admin.pod.domain/u/' + this.user.username),
         ]);
         console.log('write resp', write);
       } catch (error) {
         console.log('write error', error)
       }
-      alert('Pod grabado');
-      await loader.dismiss();
+      // alert('Pod grabado');
       this.subscriptionNFC.unsubscribe();
     }, error => {
       console.log('nfcEvent error', error);
@@ -66,5 +79,14 @@ export class ActivePodPage implements OnInit {
       this.subscriptionNFC = null;
     }
   }
+  async showStatusModal(status) {
 
+    const modal = await this.modalController.create({
+      component: ModalScanStatusComponent,
+      componentProps: {
+        parentStatus: status
+      }
+    });
+    await modal.present();
+  }
 }
