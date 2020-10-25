@@ -21,54 +21,56 @@
       </ion-fab-button>
     </ion-fab>
   </div>
-  <div class="is-public">
-    <ion-label>Perfil Público:</ion-label>
-    <ion-toggle mode="ios" slot="end" color="success" [checked]="user?.private"></ion-toggle>
-  </div>
-  <ion-card *ngIf="user">
-    <ion-card-content>
-      <ion-item>
-        <ion-label color="medium">
-          Nombre {{ user?.first_name }}
-        </ion-label>
-        <ion-input [(ngModel)]="user.first_name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="medium">
-          Empresa
-        </ion-label>
-        <ion-input [(ngModel)]="user.company"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="medium">
-          Cargo
-        </ion-label>
-        <ion-input [(ngModel)]="user.job_position"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="medium">
-          Ubicación
-        </ion-label>
-        <ion-input class="ion-text-wrap" [(ngModel)]="user.location"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="medium">
-          Usuario
-        </ion-label>
-        <ion-input [(ngModel)]="user.username"></ion-input>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-  <ion-card *ngIf="user">
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-label color="medium">
-          Sobre mi
-        </ion-label>
-      </ion-item>
-      <ion-textarea placeholder="Escribí sobre tu historia..." [(ngModel)]="user.bio"></ion-textarea>
-    </ion-card-content>
-  </ion-card>
+  <form *ngIf="user" [formGroup]="userForm">
+    <div class="is-public">
+      <ion-label>Perfil Público:</ion-label>
+      <ion-toggle mode="ios" slot="end" color="success" formControlName="public_profile"></ion-toggle>
+    </div>
+    <ion-card *ngIf="user">
+      <ion-card-content>
+        <ion-item>
+          <ion-label color="medium">
+            Nombre {{ user?.first_name }}
+          </ion-label>
+          <ion-input formControlName="first_name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium">
+            Empresa
+          </ion-label>
+          <ion-input formControlName="company"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium">
+            Cargo
+          </ion-label>
+          <ion-input formControlName="job_position"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium">
+            Ubicación
+          </ion-label>
+          <ion-input class="ion-text-wrap" formControlName="location"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="medium">
+            Usuario
+          </ion-label>
+          <ion-input formControlName="username"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="user">
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label color="medium">
+            Sobre mi
+          </ion-label>
+        </ion-item>
+        <ion-textarea placeholder="Escribí sobre tu historia..." formControlName="bio"></ion-textarea>
+      </ion-card-content>
+    </ion-card>
+  </form>
   <ion-label class="sharing-profile" *ngIf="user">
     <p>
       Cuando tu perfil es publico, cualquier persona podrá acceder a tu perfil entrando en este link:
