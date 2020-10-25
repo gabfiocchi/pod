@@ -58,6 +58,15 @@
           </ion-label>
           <ion-input formControlName="username"></ion-input>
         </ion-item>
+        <ion-item class="color-item" lines="none">
+          <ion-label color="medium">
+            Color
+          </ion-label>
+          <ion-note (click)="presentColorSelect($event)">
+            <div class="color" [ngStyle]="getColorBackground()"></div>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </ion-note>
+        </ion-item>
       </ion-card-content>
     </ion-card>
     <ion-card *ngIf="user">

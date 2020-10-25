@@ -48,11 +48,9 @@ export class ContactsPage implements OnInit {
       } else {
         this.filterList(null, true);
       }
-
-      // TODO: Do logic to apply filters with data.
     }
   }
-  private applyFilters() {
+  private applyFilters(fromFilterList = false) {
     console.log('this.filterActive', this.filterActive);
     console.log('friends', this.friends);
 
@@ -65,9 +63,13 @@ export class ContactsPage implements OnInit {
       case 'location':
         this.sortByAlphabeticKey('location');
         break;
+      case 'last-scanned':
+        if (!fromFilterList) {
+          this.filterList(null, true);
+        }
+        break;
       default:
         console.log('this.filterActive', this.filterActive);
-        // this.filterList(null, true);
         break;
     }
   }
@@ -98,18 +100,18 @@ export class ContactsPage implements OnInit {
       this.searchTerm = event.srcElement.value;
     }
 
-    if (!searchText) {
-      this.friends = this.user && this.user.friends || [];
+    this.friends = JSON.parse(JSON.stringify(this.user && this.user.friends || []));
+    if (!searchText || searchText && searchText.length === 0) {
       return;
     } else {
       searchText = searchText.toLowerCase().trim();
     }
 
-    this.friends = this.user.friends.filter(({ friend }) => {
+    this.friends = this.friends.filter(({ friend }) => {
       const searchParams = `${friend.username} ${friend.first_name} ${friend.location} ${friend.job_position} ${friend.company}`;
       return searchParams.replace(/null/g, '').toLowerCase().includes(searchText);
     });
 
-    this.applyFilters();
+    this.applyFilters(true);
   }
 }

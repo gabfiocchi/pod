@@ -104,4 +104,22 @@
             max-width: 270px;
         }
     }
+    .color-item {
+        ion-note {
+            margin: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .color {
+            width: 32px;
+            height: 32px;
+            margin-right: 4px;
+            background: #c4c4c4;
+            border: 1px solid #ffffff;
+            box-sizing: border-box;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+    }
 }

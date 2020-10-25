@@ -8,6 +8,7 @@ import { EditProfilePageRoutingModule } from './edit-profile-routing.module';
 
 import { EditProfilePage } from './edit-profile.page';
 import { BottomBarModule } from '../../components/bottom-bar/bottom-bar.module';
+import { SelectColorsModule } from 'src/app/components/select-colors/select-colors.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { BottomBarModule } from '../../components/bottom-bar/bottom-bar.module';
     ReactiveFormsModule,
     IonicModule,
     EditProfilePageRoutingModule,
-    BottomBarModule
+    BottomBarModule,
+    SelectColorsModule,
   ],
   declarations: [EditProfilePage]
 })
