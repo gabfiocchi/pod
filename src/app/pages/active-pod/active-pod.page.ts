@@ -34,6 +34,9 @@ export class ActivePodPage implements OnInit {
     const modal = await this.modalController.create({
       component: ModalScanComponent,
       cssClass: 'bottom-sheet',
+      componentProps: {
+        isActivate: true
+      }
     });
     await modal.present();
     this.subscriptionNFC = this.nfc.addNdefListener().subscribe(async (nfcEvent) => {
@@ -48,7 +51,7 @@ export class ActivePodPage implements OnInit {
         // si tiene mensaje, lo leemos y vemos que es.
         let payload = tag.ndefMessage[0].payload;
         // let tagContent = this.nfc.bytesToString(payload);
-        let tagContent = this.ndef.uriHelper.decodePayload(payload);        ;
+        let tagContent = this.ndef.uriHelper.decodePayload(payload);;
         // TODO: Add logic valid pod.
         console.log('tagContent', tagContent)
         this.showStatusModal('success');
@@ -67,6 +70,7 @@ export class ActivePodPage implements OnInit {
         console.log('write error', error)
       }
       // alert('Pod grabado');
+      modal.dismiss();
       this.subscriptionNFC.unsubscribe();
     }, error => {
       console.log('nfcEvent error', error);

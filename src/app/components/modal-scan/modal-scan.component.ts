@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { Ndef, NFC } from '@ionic-native/nfc/ngx';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ModalScanComponent implements OnInit {
   subscriptionNFC: Subscription;
+  @Input() isActivate: boolean;
   constructor(
     private platform: Platform,
     private modalController: ModalController,
@@ -23,7 +24,9 @@ export class ModalScanComponent implements OnInit {
 
   ionViewWillEnter() {
     this.platform.ready().then(() => {
-      this.scanTag();
+      if (!this.isActivate) {
+        this.scanTag();
+      }
     });
   }
 
@@ -47,10 +50,10 @@ export class ModalScanComponent implements OnInit {
         this.showStatusModal('success');
 
         setTimeout(() => {
-          this.closeModal();
           console.log('ruta', '/contact-profile/' + username)
           this.router.navigateByUrl('/contact-profile/' + username);
-        }, 3000);
+          this.closeModal();
+        }, 2000);
       } else {
         this.showStatusModal('error');
       }
