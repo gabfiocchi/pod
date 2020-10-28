@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ModalController, PopoverController } from '@ionic/angular';
+import { ModalLinksComponent } from 'src/app/components/modal-links/modal-links.component';
 import { ModalEditLinkComponent } from '../../components/modal-edit-link/modal-edit-link.component';
 import { SelectColorsComponent } from '../../components/select-colors/select-colors.component';
 import { UsersService } from '../../services/users.service';
@@ -13,6 +14,7 @@ import { UsersService } from '../../services/users.service';
 export class EditProfilePage implements OnInit {
 
   colors;
+  links: any;
   user: any;
   userForm: FormGroup;
   constructor(
@@ -25,6 +27,7 @@ export class EditProfilePage implements OnInit {
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({});
+    this.getLinks();
     this.getColors();
 
     this.usersService.user$.subscribe(value => {
@@ -34,6 +37,11 @@ export class EditProfilePage implements OnInit {
       }
     });
   }
+  private async getLinks() {
+    const { data } = await this.usersService.profileLinks();
+    this.links = data;
+  }
+
   private async getColors() {
     const { data } = await this.usersService.profileColors();
     this.colors = data;
@@ -58,13 +66,49 @@ export class EditProfilePage implements OnInit {
   }
 
 
-  async openLinkEditor() {
+  async openLinkEditor(link, type, value?, id?) {
+    console.log('link', this.user, link)
     const modal = await this.modalController.create({
+      id: 'modal-link',
       component: ModalEditLinkComponent,
-      cssClass: 'bottom-sheet',
+      cssClass: ['bottom-sheet', 'auto-height'],
+      componentProps: {
+        action: type,
+        value,
+        id,
+        parentUser: this.user,
+        parentLink: link
+      }
     });
     await modal.present();
   }
+
+  editLink(item) {
+    console.log('item', item);
+    this.openLinkEditor(item.link, 'edit', item.value, item.id);
+  }
+  // remove
+  // {"links":[{"id":15,"user":null}]}
+
+  async openLinksSelector() {
+    const modal = await this.modalController.create({
+      id: 'modal-links',
+      component: ModalLinksComponent,
+      cssClass: ['bottom-sheet'],
+      componentProps: {
+        parentUser: this.user,
+        parentLinks: this.links,
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((event) => {
+      if (event && event.role === 'add') {
+        this.openLinkEditor(event.data, event.role);
+      }
+    });
+  }
+
 
   async updateProfile() {
     const loader = await this.loadingController.create();
@@ -138,5 +182,27 @@ export class EditProfilePage implements OnInit {
         loader.dismiss();
       }
     });
+  }
+
+  async deleteLink(id) {
+    const loader = await this.loadingController.create();
+    await loader.present();
+
+    try {
+      const user = this.usersService.user;
+      const { data } = await this.usersService.updateProfile(
+        user.id,
+        {
+          links: [{
+            user: null,
+            id
+          }]
+        }
+      )
+      this.usersService.user = data;
+    } catch (error) {
+      console.log('error', error);
+    }
+    loader.dismiss();
   }
 }

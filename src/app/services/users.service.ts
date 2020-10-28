@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-const profileFields = '*,color.*,links.link.image.data,links.link.*,links.value,qr.data.*,friends.friend.*,friends.friend.links.link.image.data,friends.created,friends.friend.links.link.*,friends.friend.links.value';
+// const profileFields = '*,color.*,links.link.image.data,links.link.*,links.value,links.id,qr.data.*,friends.friend.*,friends.friend.links.link.image.data,friends.created,friends.friend.links.link.*,friends.friend.links.value';
+const profileFields = '*.*.*.*';
 @Injectable({
   providedIn: 'root'
 })
@@ -97,5 +98,9 @@ export class UsersService {
 
   profileColors() {
     return this.http.get<any>(environment.apirest.base + environment.apirest.colors).toPromise();
+  }
+
+  profileLinks() {
+    return this.http.get<any>(environment.apirest.base + environment.apirest.links + '?fields=*,image.data').toPromise();
   }
 }

@@ -1,33 +1,29 @@
-<div class="bottom-sheet-backdrop" (click)="closeModal()">
-</div>
+<div class="bottom-sheet-backdrop" (click)="closeModal()"></div>
 <div class="bottom-sheet-container ion-text-center ion-padding">
   <ion-button class="action" color="medium" fill="clear" (click)="closeModal()">
     <ion-icon name="close-circle-sharp" slot="icon-only"></ion-icon>
   </ion-button>
   <h2>
     <!-- {{ parentLink. }} -->
-    Editá tu numero de telefono:
+    {{ title }}
   </h2>
   <ion-list class="link ion-margin">
     <ion-item lines="none">
       <ion-avatar slot="start">
-        <img src="https://pod-admin.gabfiocchi.dev/api/assets/ocez79333i80wkg0">
+        <img [src]="parentLink?.image?.data?.thumbnails[6]?.url">
       </ion-avatar>
-      <!-- <ion-label>+5491132676018</ion-label> -->
-      <ion-input placeholder="+5491132676018"></ion-input>
+      <ion-input [(ngModel)]="input" [placeholder]="parentLink.placeholder"></ion-input>
       <ion-button fill="clear" slot="end" color="dark">
         <ion-icon slot="icon-only" name="close-outline"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
-  <p>
-    Recordá siempre poner el código
-    de area (Ejemplo. +54911 para Bs As)
-  </p>
-  <ion-button color="dark" mode="ios" expand="block" fill="outline" size="small">
+  <p [innerHTML]="parentLink.description"></p>
+  <ion-button *ngIf="this.action !== 'add'" (click)="deleteLink()" color="dark" mode="ios" expand="block" fill="outline"
+    size="small">
     Eliminar link
   </ion-button>
-  <ion-button mode="ios" expand="block" size="large">
+  <ion-button (click)="save()" mode="ios" expand="block" size="large">
     GUARDAR
   </ion-button>
 </div>

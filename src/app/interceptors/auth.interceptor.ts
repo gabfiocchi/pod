@@ -90,6 +90,10 @@ export class AuthInterceptor implements HttpInterceptor {
             url: environment.apirest.me,
             defaultToken: null
         }, {
+            method: 'GET',
+            url: environment.apirest.links,
+            defaultToken: null
+        }, {
             method: ['GET', 'PATCH'],
             url: environment.apirest.user,
             defaultToken: null
