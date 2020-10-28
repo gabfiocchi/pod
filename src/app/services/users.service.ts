@@ -54,6 +54,9 @@ export class UsersService {
     return this.http.post<any>(environment.apirest.base + environment.apirest.user, body).toPromise();
   }
 
+  getUserProfile(username) {
+    return this.http.get<any>(environment.apirest.base + environment.apirest.user + `?single=1&filter[username][eq]=${username}&fields=${profileFields}`).toPromise();
+  }
   getProfile() {
     return this.http.get<any>(environment.apirest.base + environment.apirest.user + `?single=1&fields=${profileFields}`).toPromise();
   }

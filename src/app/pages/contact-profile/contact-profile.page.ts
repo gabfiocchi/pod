@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent } from '@ionic/angular';
+import { IonContent, LoadingController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class ContactProfilePage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private usersService: UsersService,
+    private loadingController: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -31,9 +32,11 @@ export class ContactProfilePage implements OnInit {
         } else {
           value.friends = value.friends || [];
           const user = value.friends.find(({ friend }) => friend.username === username);
-          console.log('user', user.friend);
           if (user && user.friend) {
+            console.log('user', user.friend);
             this.user = user.friend;
+          } else {
+            this.recoverUserProfile(username);
           }
         }
         console.log('value', value.friends);
@@ -42,6 +45,18 @@ export class ContactProfilePage implements OnInit {
 
       this.getColorBackground();
     });
+  }
+  private async recoverUserProfile(username) {
+    const loader = await this.loadingController.create();
+    await loader.present();
+    try {
+      const { data } = await this.usersService.getUserProfile(username);
+      console.log('data', data);
+      this.user = data;
+    } catch (error) {
+
+    }
+    await loader.dismiss();
   }
 
   private async getColors() {
