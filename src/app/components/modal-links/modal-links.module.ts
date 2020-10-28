@@ -1,19 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalEditLinkComponent } from './modal-edit-link.component';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-
-
+import { ModalLinksComponent } from './modal-links.component';
 
 @NgModule({
   declarations: [
-    ModalEditLinkComponent
+    ModalLinksComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule
   ]
 })
-export class ModalEditLinkModule { }
+export class ModalLinksModule { }

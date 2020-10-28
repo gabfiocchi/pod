@@ -5,6 +5,7 @@ export const environment = {
 
     // user
     colors: '/items/colors',
+    links: '/items/links',
     login: '/auth/authenticate',
     requestPassword: '/auth/password/request',
     resetPassword: '/auth/password/reset',
