@@ -7,7 +7,7 @@ import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 // const profileFields = '*,color.*,links.link.image.data,links.link.*,links.value,links.id,qr.data.*,friends.friend.*,friends.friend.links.link.image.data,friends.created,friends.friend.links.link.*,friends.friend.links.value';
-const profileFields = '*.*.*.*';
+const profileFields = '*.*.*.*.*.*';
 @Injectable({
   providedIn: 'root'
 })

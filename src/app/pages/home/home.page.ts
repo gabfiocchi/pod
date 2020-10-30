@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { ModalEditLinkComponent } from 'src/app/components/modal-edit-link/modal-edit-link.component';
 import { ModalLinksComponent } from 'src/app/components/modal-links/modal-links.component';
 import { ModalQrComponent } from '../../components/modal-qr/modal-qr.component';
@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
   links: any;
   constructor(
     private usersService: UsersService,
+    private loadingController: LoadingController,
     private modalController: ModalController,
   ) { }
 
@@ -74,5 +75,35 @@ export class HomePage implements OnInit {
         this.openLinkEditor(event.data);
       }
     });
+  }
+
+  updateAllVisibilities() {
+    console.log('links', this.user.links);
+    const links = this.user.links.map(link => ({
+      id: link.id,
+      hidden: false
+    }));
+
+    console.log('links', links);
+    this.updateUser(links);
+  }
+  updateVisibility(item) {
+    console.log(this.user);
+    console.log(item);
+    this.updateUser([{
+      id: item.id,
+      hidden: !item.hidden
+    }]);
+  }
+  private async updateUser(links) {
+    const loader = await this.loadingController.create();
+    await loader.present();
+    try {
+      const { data } = await this.usersService.updateProfile(this.user.id, { links });
+      this.usersService.user = data;
+    } catch (error) {
+      console.log('error', error);
+    }
+    await loader.dismiss();
   }
 }

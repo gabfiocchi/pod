@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class ContactProfilePage implements OnInit {
   user: any;
   colors: any;
+  links: any;
   // @ViewChild('map', { read: ElementRef }) ionContent: ElementRef;
   // @ViewChild(IonContent, { read: ElementRef }) content: IonContent;
   @ViewChild(IonContent, { read: ElementRef }) private content: ElementRef;
@@ -28,11 +29,13 @@ export class ContactProfilePage implements OnInit {
       if (value) {
         console.log('username', username)
         if (username === value.username) {
+          this.links = value.links;
           this.user = value;
         } else {
           value.friends = value.friends || [];
           const user = value.friends.find(({ friend }) => friend && friend.username === username);
           if (user && user.friend) {
+            this.mappingLinks(user)
             this.user = user.friend;
           } else {
             this.recoverUserProfile(username);
@@ -49,11 +52,19 @@ export class ContactProfilePage implements OnInit {
     try {
       const { data } = await this.usersService.getUserProfile(username);
       const currentUser = this.usersService.user;
+
+      this.filterLinks(data);
+
+      const links = this.links.map(link => ({
+        users_links_id: {
+          id: link.id
+        }
+      }))
+
       const friend = {
         friends: [{
           friend: data.id,
-          created: null,
-          links: null
+          links
         }]
       };
 
@@ -73,7 +84,7 @@ export class ContactProfilePage implements OnInit {
     this.getColorBackground();
   }
 
-  async getColorBackground() {
+  private async getColorBackground() {
     let primary: string, secondary: string;
 
     if (this.user && this.user.color) {
@@ -92,9 +103,17 @@ export class ContactProfilePage implements OnInit {
     }
   }
 
-  setStyle(value: string): void {
+  private setStyle(value: string): void {
     if (this.content && this.content.nativeElement) {
       this.content.nativeElement.style.setProperty('--background', value);
     }
+  }
+
+  private filterLinks(user) {
+    this.links = user.links.filter(link => link && !link.hidden);
+  }
+
+  private mappingLinks(user) {
+    this.links = user.links.map(link => (link.users_links_id));
   }
 }
