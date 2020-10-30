@@ -86,7 +86,7 @@ export class ModalEditLinkComponent implements OnInit {
         user.id,
         {
           links: [{
-            user: null,
+            $delete: true,
             id: this.id
           }]
         }

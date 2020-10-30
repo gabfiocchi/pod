@@ -41,7 +41,7 @@ export class VerificationAccountPage implements OnInit {
       await this.usersService.verifyVerificationCode(tempEmail, code);
 
       const { data } = await this.usersService.signInWithEmail({ email: tempEmail, password: tempPassword });
-      const userData = await this.usersService.getProfile();
+      const userData = await this.usersService.getProfile(tempEmail);
 
       await this.storage.remove(STORAGE_LOCATIONS.TEMP_EMAIL);
       await this.storage.remove(STORAGE_LOCATIONS.TEMP_PASS);

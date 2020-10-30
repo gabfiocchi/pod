@@ -194,7 +194,7 @@ export class EditProfilePage implements OnInit {
         user.id,
         {
           links: [{
-            user: null,
+            $delete: true,
             id
           }]
         }
