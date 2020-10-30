@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
 
     try {
       const { data } = await this.usersService.signInWithEmail(this.loginForm.value);
-      const userData = await this.usersService.getProfile();
+      const userData = await this.usersService.getProfile(this.loginForm.value.email);
 
       console.log('data', data)
       console.log('data', userData)

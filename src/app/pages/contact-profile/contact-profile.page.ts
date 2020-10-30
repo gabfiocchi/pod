@@ -31,16 +31,13 @@ export class ContactProfilePage implements OnInit {
           this.user = value;
         } else {
           value.friends = value.friends || [];
-          const user = value.friends.find(({ friend }) => friend.username === username);
+          const user = value.friends.find(({ friend }) => friend && friend.username === username);
           if (user && user.friend) {
-            console.log('user', user.friend);
             this.user = user.friend;
           } else {
             this.recoverUserProfile(username);
           }
         }
-        console.log('value', value.friends);
-        console.log('value', value.username);
       }
 
       this.getColorBackground();
@@ -51,7 +48,17 @@ export class ContactProfilePage implements OnInit {
     await loader.present();
     try {
       const { data } = await this.usersService.getUserProfile(username);
-      console.log('data', data);
+      const currentUser = this.usersService.user;
+      const friend = {
+        friends: [{
+          friend: data.id,
+          created: null,
+          links: null
+        }]
+      };
+
+      const updatedProfile = await this.usersService.updateProfile(currentUser.id, friend);
+      this.usersService.user = updatedProfile.data;
       this.user = data;
     } catch (error) {
 
@@ -67,7 +74,6 @@ export class ContactProfilePage implements OnInit {
   }
 
   async getColorBackground() {
-    console.log('this.colors', this.colors)
     let primary: string, secondary: string;
 
     if (this.user && this.user.color) {
