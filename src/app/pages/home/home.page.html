@@ -48,25 +48,20 @@
           Seleccioná la información que quieras compartir cuando escaneen tu POD
         </p>
         <div class="social-links">
-          <ion-button class="select-all" expand="block" mode="ios">
+          <ion-button class="select-all" expand="block" mode="ios" (click)="updateAllVisibilities()">
             SELECCIONA TODOS
           </ion-button>
           <ion-card mode="ios">
             <ion-card-content>
               <ion-grid class="ion-no-padding">
                 <ion-row>
-                  <!-- <ion-col size="4">
-                    <div class="link desactive">
-                      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                    </div>
-                  </ion-col> -->
                   <ion-col size="4" *ngFor="let item of user?.links">
-                    <a class="link" [href]="item.link.link + item.value" target="_blank">
+                    <div class="link" (click)="updateVisibility(item)">
                       <img [src]="item.link.image?.data?.full_url">
-                      <div class="icon-wrapper">
+                      <div class="icon-wrapper" *ngIf="!item.hidden">
                         <ion-icon color="success" slot="start" name="checkmark-circle"></ion-icon>
                       </div>
-                    </a>
+                    </div>
                   </ion-col>
                 </ion-row>
               </ion-grid>
