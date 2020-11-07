@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -17,6 +17,7 @@ export class ContactsPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private usersService: UsersService,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
@@ -28,6 +29,11 @@ export class ContactsPage implements OnInit {
       }
     });
   }
+
+  ionViewDidEnter() {
+    this.menu.enable(true, 'main');
+  }
+
   async openFilters() {
     const modal = await this.modalController.create({
       component: FilterModalComponent,

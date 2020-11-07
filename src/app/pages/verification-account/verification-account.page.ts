@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { UsersService } from 'src/app/services/users.service';
 import { STORAGE_LOCATIONS } from '../../../environments/environment';
@@ -20,6 +20,7 @@ export class VerificationAccountPage implements OnInit {
     private toastController: ToastController,
     private usersService: UsersService,
     private storage: Storage,
+    private menu: MenuController,
   ) { }
 
   async ngOnInit() {
@@ -28,6 +29,10 @@ export class VerificationAccountPage implements OnInit {
       this.navController.setDirection('root');
       this.router.navigateByUrl('/login');
     }
+  }
+
+  ionViewDidEnter() {
+    this.menu.enable(false, 'main');
   }
 
   // this called only if user entered full code

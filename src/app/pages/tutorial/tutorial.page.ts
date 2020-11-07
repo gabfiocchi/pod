@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tutorial',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TutorialPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private menu: MenuController,
+  ) { }
 
   ngOnInit() {
+  }
+  ionViewDidEnter() {
+    this.menu.enable(false, 'main');
   }
 
 }

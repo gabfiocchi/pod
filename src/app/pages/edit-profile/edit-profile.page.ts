@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, ModalController, PopoverController } from '@ionic/angular';
+import { LoadingController, MenuController, ModalController, PopoverController } from '@ionic/angular';
 import { ModalLinksComponent } from 'src/app/components/modal-links/modal-links.component';
 import { ModalEditLinkComponent } from '../../components/modal-edit-link/modal-edit-link.component';
 import { SelectColorsComponent } from '../../components/select-colors/select-colors.component';
@@ -23,6 +23,7 @@ export class EditProfilePage implements OnInit {
     private popoverController: PopoverController,
     private usersService: UsersService,
     private formBuilder: FormBuilder,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
@@ -37,6 +38,11 @@ export class EditProfilePage implements OnInit {
       }
     });
   }
+
+  ionViewDidEnter() {
+    this.menu.enable(true, 'main');
+  }
+
   private async getLinks() {
     const { data } = await this.usersService.profileLinks();
     this.links = data;

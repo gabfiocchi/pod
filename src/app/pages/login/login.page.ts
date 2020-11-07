@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { ERROR_CODES, VALIDATORS_REGEX, STORAGE_LOCATIONS } from '../../../environments/environment';
 import { UsersService } from '../../services/users.service';
 import { Storage } from '@ionic/storage';
@@ -22,11 +22,16 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private toastController: ToastController,
     private usersService: UsersService,
-    private storage: Storage
+    private storage: Storage,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
     this.buildForm();
+  }
+
+  ionViewDidEnter() {
+    this.menu.enable(false, 'main');
   }
 
   private buildForm(): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ndef, NFC } from '@ionic-native/nfc/ngx';
-import { ModalController, Platform } from '@ionic/angular';
+import { MenuController, ModalController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ModalScanStatusComponent } from 'src/app/components/modal-scan-status/modal-scan-status.component';
 import { ModalScanComponent } from 'src/app/components/modal-scan/modal-scan.component';
@@ -19,12 +19,17 @@ export class ActivePodPage implements OnInit {
     private nfc: NFC,
     private ndef: Ndef,
     private modalController: ModalController,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
     this.usersService.user$.subscribe(value => {
       this.user = value;
     });
+  }
+
+  ionViewDidEnter() {
+    this.menu.enable(true, 'main');
   }
 
   async scanTag() {

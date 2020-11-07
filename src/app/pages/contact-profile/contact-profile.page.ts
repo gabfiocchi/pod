@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent, LoadingController } from '@ionic/angular';
+import { IonContent, LoadingController, MenuController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class ContactProfilePage implements OnInit {
     private route: ActivatedRoute,
     private usersService: UsersService,
     private loadingController: LoadingController,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
@@ -46,6 +47,11 @@ export class ContactProfilePage implements OnInit {
       this.getColorBackground();
     });
   }
+
+  ionViewDidEnter() {
+    this.menu.enable(true, 'main');
+  }
+
   private async recoverUserProfile(username) {
     const loader = await this.loadingController.create();
     await loader.present();

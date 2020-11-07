@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { UsersService } from 'src/app/services/users.service';
 import { VALIDATORS_REGEX, STORAGE_LOCATIONS } from '../../../environments/environment';
@@ -23,11 +23,16 @@ export class RegisterPage implements OnInit {
     private navController: NavController,
     private router: Router,
     private storage: Storage,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
     this.showPassword = false;
     this.buildRegisterForm();
+  }
+
+  ionViewDidEnter() {
+    this.menu.enable(false, 'main');
   }
 
 

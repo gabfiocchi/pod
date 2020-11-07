@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, MenuController, ModalController } from '@ionic/angular';
 import { ModalEditLinkComponent } from 'src/app/components/modal-edit-link/modal-edit-link.component';
 import { ModalLinksComponent } from 'src/app/components/modal-links/modal-links.component';
 import { ModalQrComponent } from '../../components/modal-qr/modal-qr.component';
@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
     private usersService: UsersService,
     private loadingController: LoadingController,
     private modalController: ModalController,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
@@ -25,6 +26,10 @@ export class HomePage implements OnInit {
     this.usersService.user$.subscribe(value => {
       this.user = value;
     });
+  }
+
+  ionViewDidEnter() {
+    this.menu.enable(true, 'main');
   }
 
   private async getData() {
