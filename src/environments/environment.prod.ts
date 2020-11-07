@@ -1,4 +1,5 @@
 export const environment = {
+  production: true,
   apirest: {
     base: 'https://pod-admin.gabfiocchi.dev/api',
     // public

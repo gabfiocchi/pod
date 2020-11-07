@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "podtecnologia-10932": {
+      "hosting": {
+        "app": [
+          "podtecnologia-10932"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "podtecnologia-10932"
+  }
+}

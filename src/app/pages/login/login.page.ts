@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 })
 export class LoginPage implements OnInit {
   private toast: HTMLIonToastElement;
-  private showPassword: boolean;
+  showPassword: boolean;
   loginForm: FormGroup;
 
   constructor(

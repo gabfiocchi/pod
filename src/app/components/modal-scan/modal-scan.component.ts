@@ -32,33 +32,47 @@ export class ModalScanComponent implements OnInit {
 
   private async scanTag() {
     this.removeSubscription();
-    this.subscriptionNFC = this.nfc.addNdefListener().subscribe(async (nfcEvent) => {
-      const tag = nfcEvent.tag;
-      if (tag.id) {
-        console.log(this.nfc.bytesToHexString(tag.id));
+
+    try {
+      if (this.platform.is('cordova')) {
+        if (this.platform.is('android')) {
+          this.subscriptionNFC = this.nfc.addNdefListener().subscribe((nfcEvent) => this.scanNfcEvent(nfcEvent));
+        } else {
+          this.scanNfcEvent(await this.nfc.scanNdef())
+        }
       }
-      if (tag.ndefMessage) {
-        // si tiene mensaje, lo leemos y vemos que es.
-        let payload = tag.ndefMessage[0].payload;
-        // let tagContent = this.nfc.bytesToString(payload);
-        let tagContent = this.ndef.uriHelper.decodePayload(payload);;
+    } catch (error) {
+      console.log('error scanTag', error);
+    }
+  }
 
-        console.log('tagContent', tagContent);
-        const username = tagContent.replace(/https:\/\/admin.pod.domain\/u\//gm, '').trim();
-        console.log('tagContent', username);
 
-        this.showStatusModal('success');
+  private scanNfcEvent(nfcEvent) {
+    const tag = nfcEvent.tag;
+    if (tag.id) {
+      console.log(this.nfc.bytesToHexString(tag.id));
+    }
+    if (tag.ndefMessage) {
+      // si tiene mensaje, lo leemos y vemos que es.
+      let payload = tag.ndefMessage[0].payload;
+      // let tagContent = this.nfc.bytesToString(payload);
+      let tagContent = this.ndef.uriHelper.decodePayload(payload);;
 
-        setTimeout(() => {
-          console.log('ruta', '/contact-profile/' + username)
-          this.router.navigateByUrl('/contact-profile/' + username);
-          this.closeModal();
-        }, 2000);
-      } else {
-        this.showStatusModal('error');
-      }
-      this.subscriptionNFC.unsubscribe();
-    });
+      console.log('tagContent', tagContent);
+      const username = tagContent.replace(/https:\/\/admin.pod.domain\/u\//gm, '').trim();
+      console.log('tagContent', username);
+
+      this.showStatusModal('success');
+
+      setTimeout(() => {
+        console.log('ruta', '/contact-profile/' + username)
+        this.router.navigateByUrl('/contact-profile/' + username);
+        this.closeModal();
+      }, 2000);
+    } else {
+      this.showStatusModal('error');
+    }
+    this.subscriptionNFC.unsubscribe();
   }
 
   private removeSubscription() {

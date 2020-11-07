@@ -49,7 +49,7 @@ export class VerificationAccountPage implements OnInit {
       this.usersService.user = userData.data;
       this.usersService.token = data.token;
 
-      this.router.navigateByUrl('/tutorial', { replaceUrl: true });
+      this.router.navigateByUrl('/home', { replaceUrl: true });
     } catch (error) {
       this.showToast(error.error.error.message, 'danger');
     }
