@@ -17,6 +17,7 @@ export const environment = {
     invite: '/users/invite',
     users: '/users',
     user: '/items/users',
+    files: '/files',
     ttl: 1440 * 15,
   },
 };

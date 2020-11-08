@@ -13,11 +13,13 @@
   <!-- image profile -->
   <div class="image-picture">
     <div class="image">
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      <img [src]="user?.profile_image?.data?.full_url">
     </div>
     <ion-fab>
-      <ion-fab-button color="danger" size="small">
+      <ion-fab-button color="danger" size="small" (click)="openGalleryMedia()">
         <ion-icon name="camera"></ion-icon>
+        <input #inputPicture hidden type="file" accept="image/*" (change)="changePicture($event)"
+        multiple="false" />
       </ion-fab-button>
     </ion-fab>
   </div>

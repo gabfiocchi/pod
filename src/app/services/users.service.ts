@@ -57,7 +57,7 @@ export class UsersService {
   getUserProfile(username) {
     return this.http.get<any>(environment.apirest.base + environment.apirest.user + `?single=1&filter[username][eq]=${username}&fields=${profileFields}`).toPromise();
   }
-  
+
   getMeProfile() {
     return this.http.get<any>(environment.apirest.base + environment.apirest.me).toPromise();
   }
@@ -110,5 +110,20 @@ export class UsersService {
 
   profileLinks() {
     return this.http.get<any>(environment.apirest.base + environment.apirest.links + '?fields=*,image.data').toPromise();
+  }
+
+  async uploadFile(file) {
+    const formData = new FormData();
+    formData.append('data', file.data);
+    if (file.filename_disk && file.filename_download) {
+      formData.append('filename_disk', file.filename_disk);
+      formData.append('filename_download', file.filename_download);
+    }
+    // send form
+    return this.http.post<any>(environment.apirest.base + environment.apirest.files, formData, {
+      headers: {
+        Authorization: 'Bearer web'
+      }
+    }).toPromise();
   }
 }

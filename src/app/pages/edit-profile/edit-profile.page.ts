@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, MenuController, ModalController, PopoverController } from '@ionic/angular';
 import { ModalLinksComponent } from 'src/app/components/modal-links/modal-links.component';
@@ -17,6 +17,7 @@ export class EditProfilePage implements OnInit {
   links: any;
   user: any;
   userForm: FormGroup;
+  @ViewChild('inputPicture', { read: ElementRef }) inputPicture;
   constructor(
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -208,6 +209,33 @@ export class EditProfilePage implements OnInit {
       this.usersService.user = data;
     } catch (error) {
       console.log('error', error);
+    }
+    loader.dismiss();
+  }
+  openGalleryMedia() {
+    this.inputPicture.nativeElement.click();
+  }
+
+  async changePicture(event: Event) {
+    const loader = await this.loadingController.create();
+    loader.present();
+    const files = (event.target as HTMLInputElement).files;
+
+    try {
+      if (files && files.length > 0) {
+        const file = files[0];
+        console.log('file', file);
+        const uploadFile = await this.usersService.uploadFile({
+          data: file
+        });
+
+        const { data } = await this.usersService.updateProfile(this.user.id, {
+          profile_image: uploadFile.data
+        });
+        this.usersService.user = data;
+      }
+    } catch (error) {
+
     }
     loader.dismiss();
   }
