@@ -20,7 +20,7 @@
               <ion-button disabled slot="start">
                 <ion-icon slot="icon-only" src="/assets/icons/ic_password.svg"></ion-icon>
               </ion-button>
-              <ion-input formControlName="password" placeholder="Password" [type]="(showPassword) ? 'text' : 'password'"></ion-input>
+              <ion-input formControlName="password" placeholder="Contraseña" [type]="(showPassword) ? 'text' : 'password'"></ion-input>
               <ion-button slot="end" fill="clear" (click)="togglePassword()">
                 <ion-icon *ngIf="!showPassword" slot="icon-only" name="eye-outline"></ion-icon>
                 <ion-icon *ngIf="showPassword" slot="icon-only" name="eye-off-outline"></ion-icon>

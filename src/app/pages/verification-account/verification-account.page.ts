@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
+import { IonRouterOutlet, LoadingController, MenuController, NavController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { UsersService } from 'src/app/services/users.service';
 import { STORAGE_LOCATIONS } from '../../../environments/environment';
@@ -85,5 +85,9 @@ export class VerificationAccountPage implements OnInit {
       console.log('resendCode error', error)
     }
     await loader.dismiss();
+  }
+
+  goBack() {
+    this.navController.back();
   }
 }

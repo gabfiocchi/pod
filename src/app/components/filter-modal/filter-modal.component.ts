@@ -21,7 +21,7 @@ export class FilterModalComponent implements OnInit {
     label: 'Orden alfabético (Z-A)',
     value: 'alphabetical-desc',
   }, {
-    label: 'Orden alfabético Empresa',
+    label: 'Orden alfabético por empresa',
     value: 'company-asc',
   }, {
     label: 'Más buscados',

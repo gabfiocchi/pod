@@ -1,4 +1,12 @@
 :host {
+    ion-buttons {
+        &[slot="start"] {
+            margin-left: 12px;
+        }
+        &[slot="end"] {
+            margin-right: 12px;
+        }
+    }
     ion-list-header {
         font-family: Montserrat;
         font-style: normal;

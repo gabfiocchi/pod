@@ -13,13 +13,12 @@
   <!-- image profile -->
   <div class="image-picture">
     <div class="image">
-      <img [src]="user?.profile_image?.data?.full_url">
+      <img [src]="user?.profile_image?.data?.full_url || '/assets/images/logo.png'">
     </div>
     <ion-fab>
       <ion-fab-button color="danger" size="small" (click)="openGalleryMedia()">
         <ion-icon name="camera"></ion-icon>
-        <input #inputPicture hidden type="file" accept="image/*" (change)="changePicture($event)"
-        multiple="false" />
+        <input #inputPicture hidden type="file" accept="image/*" (change)="changePicture($event)" multiple="false" />
       </ion-fab-button>
     </ion-fab>
   </div>
@@ -32,7 +31,7 @@
       <ion-card-content>
         <ion-item>
           <ion-label color="medium">
-            Nombre {{ user?.first_name }}
+            Nombre
           </ion-label>
           <ion-input formControlName="first_name"></ion-input>
         </ion-item>

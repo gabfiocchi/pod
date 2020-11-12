@@ -13,8 +13,9 @@
         right: 0;
         z-index: 10;
         ion-fab {
+            margin: 0;
             top: 0;
-            transform: translate3d(0, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
 
             ion-fab-button {
                 height: 70px;

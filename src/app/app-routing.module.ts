@@ -52,12 +52,11 @@ const routes: Routes = [
   },
   {
     path: 'verification-account',
-    loadChildren: () => import('./pages/verification-account/verification-account.module').then( m => m.VerificationAccountPageModule),
-    canActivate: [AuthGuardService],
+    loadChildren: () => import('./pages/verification-account/verification-account.module').then(m => m.VerificationAccountPageModule),
   },
   {
     path: 'tutorial',
-    loadChildren: () => import('./pages/tutorial/tutorial.module').then( m => m.TutorialPageModule)
+    loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialPageModule)
   }
 ];
 

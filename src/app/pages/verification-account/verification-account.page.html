@@ -7,9 +7,9 @@
     </ion-row>
     <ion-row class="content">
       <ion-col class="ion-text-center">
-        <h2 class="pod-title">Código Verificación</h2>
+        <h2 class="pod-title">Código de Verificación</h2>
         <p>
-          Ingresá el código de verificacion que
+          Ingresá el código de verificación que
           enviamos a tu mail
         </p>
         <code-input class="pin" [code]="code" [isCodeHidden]="false" [isNonDigitsCode]="false" [codeLength]="4"
@@ -20,7 +20,7 @@
     <ion-row class="footer">
       <ion-col class="actions">
         <!-- A donde debería ir el back? -->
-        <ion-button color="dark" mode="ios">
+        <ion-button color="dark" mode="ios" (click)="goBack()">
           <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
         </ion-button>
         <ion-button color="medium" class="ion-text-uppercase next" expand="block" mode="ios">
