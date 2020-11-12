@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   apirest: {
-    base: 'https://pod-admin.gabfiocchi.dev/api',
+    base: 'https://admin.mypod.ar/api/public/api',
     // public
 
     // user
