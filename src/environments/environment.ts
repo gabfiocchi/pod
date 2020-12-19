@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apirest: {
-    base: 'https://admin.mypod.ar/api/public/api',
+    base: 'https://admin.mypod.ar/api',
     // public
 
     // user
