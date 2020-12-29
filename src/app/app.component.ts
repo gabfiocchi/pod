@@ -15,6 +15,7 @@ import { ModalScanComponent } from './components/modal-scan/modal-scan.component
 })
 export class AppComponent implements OnInit {
   userLogged: boolean;
+  user;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -58,8 +59,11 @@ export class AppComponent implements OnInit {
       await loader.dismiss();
     };
 
-    this.usersService.user$.subscribe(async user => {
+    this.usersService.user$.subscribe(user => {
       this.userLogged = !!user;
+      if (user) {
+        this.user = user;
+      }
     });
   }
 

@@ -9,18 +9,11 @@ import { ModalScanComponent } from '../modal-scan/modal-scan.component';
   styleUrls: ['./bottom-bar.component.scss'],
 })
 export class BottomBarComponent implements OnInit {
-  user: any;
   constructor(
     private modalController: ModalController,
-    private usersService: UsersService,
   ) { }
 
   ngOnInit() {
-    this.usersService.user$.subscribe(value => {
-      if (value) {
-        this.user = value;
-      }
-    })
   }
 
   async scanPod() {

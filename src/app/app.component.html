@@ -11,6 +11,12 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
+            <ion-item lines="none" detail="false" color="dark" routerLink="/contact-profile/{{user?.username}}">
+              <ion-icon color="light" slot="start" src="/assets/icons/ic_user.svg"></ion-icon>
+              <ion-label>Ver perfil</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
             <ion-item lines="none" detail="false" color="dark" routerLink="/edit-profile">
               <ion-icon color="light" slot="start" src="/assets/icons/user-2.svg"></ion-icon>
               <ion-label>Editar perfil</ion-label>
