@@ -63,16 +63,26 @@ export class LoginPage implements OnInit {
     } catch (error) {
       console.log('error', error.error.error.code);
       if (error.error.error.code === 103) {
+        const toast = await this.toastController.create({
+          message: 'Es necesario que verifiques la cuenta',
+          buttons: [{
+            text: 'Verificar',
+            role: 'cancel'
+          }]
+        });
+
+        toast.present();
+        await toast.onWillDismiss();
         await this.requestCode();
       } else {
-        this.showToast(error.error.error, 'danger');
+        this.showToast(ERROR_CODES[error.error.error.code], 'danger');
       }
     }
 
     await loader.dismiss();
   }
   async showToast(message, color?) {
-    console.log('error', message)
+    console.log('message', message)
     this.dismissToast();
     this.toast = await this.toastController.create({
       color,
