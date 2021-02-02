@@ -1,80 +1,78 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar class="with-logo" color="transparent" mode="ios">
-    <ion-buttons slot="start">
-      <ion-menu-button color="light"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      <img class="logo" src="/assets/images/logo-white.png" alt="pod">
-    </ion-title>
-    <ion-buttons *ngIf="user && user.qr" slot="end">
-      <ion-button (click)="openQR()">
-        <ion-icon color="light" slot="icon-only" src="/assets/icons/qr.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar class="with-logo" color="transparent" mode="ios">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <img class="logo" src="/assets/images/logo-white.png" alt="pod">
+        </ion-title>
+        <ion-buttons *ngIf="user && user.qr" slot="end">
+            <ion-button (click)="openQR()">
+                <ion-icon color="light" slot="icon-only" src="/assets/icons/qr.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-list class="profile ion-margin" lines="none">
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-avatar>
-            <ion-label *ngIf="user">
-              <h2>{{ user.first_name || user.username }}</h2>
-              <p>{{ user.job_position }} <span *ngIf="user.job_position && user.company">-</span>
-                {{ user.company }}</p>
-              <p class="location" *ngIf="user.location">
-                <ion-icon name="location-outline"></ion-icon> {{ user.location }}
-              </p>
-            </ion-label>
-            <ion-button class="action ion-align-self-end" color="dark" fill="outline" slot="end"
-              routerLink="/edit-profile">
-              <ion-icon name="pencil"></ion-icon>
-            </ion-button>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <b>POD</b>s
-            </ion-label>
-            <ion-button fill="outline" slot="end">{{ user?.total_scans }}</ion-button>
-          </ion-item>
-        </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-list class="profile ion-margin" lines="none">
+                    <ion-item>
+                        <ion-avatar slot="start">
+                            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                        </ion-avatar>
+                        <ion-label *ngIf="user">
+                            <h2>{{ user.first_name || user.username }}</h2>
+                            <p>{{ user.job_position }} <span *ngIf="user.job_position && user.company">-</span> {{ user.company }}</p>
+                            <p class="location" *ngIf="user.location">
+                                <ion-icon name="location-outline"></ion-icon> {{ user.location }}
+                            </p>
+                        </ion-label>
+                        <ion-button class="action ion-align-self-end" color="dark" fill="outline" slot="end" routerLink="/edit-profile">
+                            <ion-icon name="pencil"></ion-icon>
+                        </ion-button>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            <b>pod</b>s
+                        </ion-label>
+                        <ion-button fill="outline" slot="end">{{ user?.total_scans }}</ion-button>
+                    </ion-item>
+                </ion-list>
 
-        <p class="ion-text-center message">
-          Seleccioná la información que quieras compartir cuando escaneen tu <b>pod</b>
-        </p>
-        <div class="social-links">
-          <ion-button class="select-all" expand="block" mode="ios" (click)="updateAllVisibilities()">
-            SELECCIONAR TODOS
-          </ion-button>
-          <ion-card mode="ios">
-            <ion-card-content>
-              <ion-grid class="ion-no-padding">
-                <ion-row>
-                  <ion-col size="4" *ngFor="let item of user?.links">
-                    <div class="link" (click)="updateVisibility(item)">
-                      <img [src]="item.link.image?.data?.full_url">
-                      <div class="icon-wrapper" *ngIf="!item.hidden">
-                        <ion-icon color="success" slot="start" name="checkmark-circle"></ion-icon>
-                      </div>
-                    </div>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <ion-button (click)="openLinksSelector()" class="add" expand="block" color="medium" mode="ios">
-                <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-                Agregar link
-              </ion-button>
-            </ion-card-content>
-          </ion-card>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+                <p class="ion-text-center message">
+                    Seleccioná la información que quieras compartir cuando escaneen tu <b>pod</b>
+                </p>
+                <div class="social-links">
+                    <ion-button class="select-all" expand="block" mode="ios" (click)="updateAllVisibilities()">
+                        SELECCIONAR TODOS
+                    </ion-button>
+                    <ion-card mode="ios">
+                        <ion-card-content>
+                            <ion-grid class="ion-no-padding">
+                                <ion-row>
+                                    <ion-col size="4" *ngFor="let item of user?.links">
+                                        <div class="link" (click)="updateVisibility(item)">
+                                            <img [src]="item.link.image?.data?.full_url">
+                                            <div class="icon-wrapper" *ngIf="!item.hidden">
+                                                <ion-icon color="success" slot="start" name="checkmark-circle"></ion-icon>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                            <ion-button (click)="openLinksSelector()" class="add" expand="block" color="medium" mode="ios">
+                                <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+                                Agregar link
+                            </ion-button>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-  <app-bottom-bar slot="fixed"></app-bottom-bar>
+    <app-bottom-bar slot="fixed"></app-bottom-bar>
 </ion-content>
