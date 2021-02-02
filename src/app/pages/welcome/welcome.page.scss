@@ -5,14 +5,14 @@
         flex-direction: column;
     }
     ion-row.header {
-        background: url("/assets/images/logo-welcome-background.png") repeat-x top center;
+        background: url("/assets/images/background-medium.png") repeat-x top center;
         background-size: contain;
         flex: 1;
         .logo {
             display: block;
             margin: 26px auto 40px;
-            height: 260px;
-            width: 260px;
+            height: 240px;
+            width: 240px;
         }
     }
     ion-row.content {
