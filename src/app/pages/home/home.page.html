@@ -55,7 +55,7 @@
                                 <ion-row>
                                     <ion-col size="4" *ngFor="let item of user?.links">
                                         <div class="link" (click)="updateVisibility(item)">
-                                            <img [src]="item.link.image?.data?.full_url">
+                                            <img [src]="item?.image?.data?.thumbnails[2].url || item.link?.image?.data?.full_url">
                                             <div class="icon-wrapper" *ngIf="!item.hidden">
                                                 <ion-icon color="success" slot="start" name="checkmark-circle"></ion-icon>
                                             </div>

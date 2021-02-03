@@ -19,7 +19,7 @@ export class ModalLinksComponent implements OnInit {
     console.log('this.parentUser', this.parentUser.links);
     console.log('this.parentLinks', this.parentLinks);
     this.links = this.parentLinks.map(parentLink => {
-      const exist = this.parentUser.links.find(({ link }) => link.name === parentLink.name);
+      const exist = this.parentUser.links.find(({ link }) => link.name === parentLink.name && !parentLink.custom);
       return { ...parentLink, active: !!exist }
     });
   }

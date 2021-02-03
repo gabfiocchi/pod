@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -10,12 +10,14 @@ import { UsersService } from 'src/app/services/users.service';
 export class ModalEditLinkComponent implements OnInit {
   title;
   input;
+  image;
   @Input() action: string;
   @Input() value: string;
   @Input() id: string;
   @Input() parentUser: any;
   @Input() parentLink: any;
   @Input() parentValue: any;
+  @ViewChild('inputPicture', { read: ElementRef }) inputPicture;
   constructor(
     private modalController: ModalController,
     private loadingController: LoadingController,
@@ -60,7 +62,8 @@ export class ModalEditLinkComponent implements OnInit {
         links: [{
           link: this.parentLink.id,
           value: this.input,
-          id: this.id
+          id: this.id,
+          image: this.image || null
         }]
       }
     )
@@ -97,6 +100,30 @@ export class ModalEditLinkComponent implements OnInit {
       console.log('input', this.input)
     } catch (error) {
       console.log('error', error);
+    }
+    loader.dismiss();
+  }
+  openGalleryMedia() {
+    this.inputPicture.nativeElement.click();
+  }
+
+
+  async changePicture(event: Event) {
+    const loader = await this.loadingController.create();
+    loader.present();
+    const files = (event.target as HTMLInputElement).files;
+
+    try {
+      if (files && files.length > 0) {
+        const file = files[0];
+        console.log('file', file);
+        const uploadFile = await this.usersService.uploadFile({
+          data: file
+        });
+        this.image = uploadFile.data;
+      }
+    } catch (error) {
+
     }
     loader.dismiss();
   }

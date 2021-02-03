@@ -4,14 +4,18 @@
     <ion-icon name="close-circle-sharp" slot="icon-only"></ion-icon>
   </ion-button>
   <h2>
-    <!-- {{ parentLink. }} -->
     {{ title }}
   </h2>
+
   <ion-list class="link ion-margin">
     <ion-item lines="none">
-      <ion-avatar slot="start">
+      <ion-avatar *ngIf="!parentLink?.custom" slot="start">
         <img [src]="parentLink?.image?.data?.thumbnails[6]?.url">
       </ion-avatar>
+      <ion-button *ngIf="parentLink?.custom" color="danger" size="small" slot="start" (click)="openGalleryMedia()">
+        <ion-icon name="camera"></ion-icon>
+        <input #inputPicture hidden type="file" accept="image/*" (change)="changePicture($event)" multiple="false" />
+      </ion-button>
       <ion-input autofocus="true" [(ngModel)]="input" [placeholder]="parentLink.placeholder"></ion-input>
       <ion-button fill="clear" slot="end" color="dark">
         <ion-icon slot="icon-only" name="close-outline"></ion-icon>
