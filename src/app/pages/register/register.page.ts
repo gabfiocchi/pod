@@ -98,7 +98,6 @@ export class RegisterPage implements OnInit {
 
   async requestCode() {
     try {
-      this.usersService.requestVerificationCode(this.registerForm.value.email);
       await this.storage.set(STORAGE_LOCATIONS.TEMP_EMAIL, this.registerForm.value.email);
       await this.storage.set(STORAGE_LOCATIONS.TEMP_PASS, this.registerForm.value.password);
       this.router.navigateByUrl('/verification-account');
