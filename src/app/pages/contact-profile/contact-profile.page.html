@@ -37,8 +37,9 @@
               <ion-row>
                 <ion-col size="4" *ngFor="let item of links">
                   <!-- cuando hace click, agregamos el `active` -->
-                  <a class="link" [href]="item.link.link + item.value" target="_blank">
-                    <img [src]="item.link.image?.data?.full_url">
+                  <a class="link" [href]="item.link.custom ? item.value : item.link.link + item.value" target="_blank">
+                    <img
+                      [src]="item.link.custom && item?.image ? item?.image?.data?.thumbnails[2].url : item.link.image?.data?.thumbnails[2].url">
                     <p>{{item.link.name}}</p>
                   </a>
                 </ion-col>

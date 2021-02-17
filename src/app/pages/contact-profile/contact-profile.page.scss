@@ -71,6 +71,10 @@
                     color: #000000;
                     white-space: nowrap;
                 }
+                img {
+                    border-radius: 100%;
+                    overflow: hidden;
+                }
             }
         }
     }
