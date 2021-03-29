@@ -12,7 +12,7 @@
       <ion-avatar *ngIf="!parentLink?.custom" slot="start">
         <img [src]="parentLink?.image?.data?.thumbnails[6]?.url">
       </ion-avatar>
-      <ion-button *ngIf="parentLink?.custom" color="danger" size="small" slot="start" (click)="openGalleryMedia()">
+      <ion-button class="camera" *ngIf="parentLink?.custom" color="danger" size="small" slot="start" (click)="openGalleryMedia()">
         <ion-icon name="camera"></ion-icon>
         <input #inputPicture hidden type="file" accept="image/*" (change)="changePicture($event)" multiple="false" />
       </ion-button>

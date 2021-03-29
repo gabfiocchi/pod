@@ -23,6 +23,10 @@ export class ContactProfilePage implements OnInit {
     private menu: MenuController,
   ) { }
 
+  get displayName() {
+    return (this.user.first_name || '' + ' ' + this.user.last_name || '').trim() || this.user.username;
+  }
+
   ngOnInit() {
     this.getColors();
     const username = this.route.snapshot.paramMap.get('username');

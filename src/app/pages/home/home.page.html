@@ -24,10 +24,10 @@
                             <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
                         </ion-avatar>
                         <ion-label *ngIf="user">
-                            <h2>{{ user.first_name || user.username }}</h2>
-                            <p>{{ user.job_position }} <span *ngIf="user.job_position && user.company">-</span> {{ user.company }}</p>
-                            <p class="location" *ngIf="user.location">
-                                <ion-icon name="location-outline"></ion-icon> {{ user.location }}
+                            <h2>{{ user?.first_name || user?.username }}</h2>
+                            <p>{{ user?.job_position }} <span *ngIf="user?.job_position && user?.company">-</span> {{ user?.company }}</p>
+                            <p class="location" *ngIf="user?.location">
+                                <ion-icon name="location-outline"></ion-icon> {{ user?.location }}
                             </p>
                         </ion-label>
                         <ion-button class="action ion-align-self-end" color="dark" fill="outline" slot="end" routerLink="/edit-profile">

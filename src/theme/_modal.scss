@@ -31,8 +31,12 @@ ion-modal.bottom-sheet {
         position: absolute;
         top: 0;
         right: 0;
+        &.left {
+            right: unset;
+            left: 0;
+        }
         ion-icon {
-            font-size: 20px;
+            font-size: 24px;
         }
     }
 

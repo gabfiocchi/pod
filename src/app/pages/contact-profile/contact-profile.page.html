@@ -14,16 +14,27 @@
     <ion-row>
       <ion-col class="ion-text-center">
         <ion-list *ngIf="user" class="profile ion-margin">
-          <ion-item lines="none">
+          <ion-item lines="none" class="ion-align-items-start">
             <ion-avatar slot="start">
               <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
             </ion-avatar>
-            <ion-label>
-              <h2>{{ user.first_name || user.username }}</h2>
-              <p>{{ user.job_position }} <span *ngIf="user.job_position && user.company">-</span>
-                {{ user.company }}</p>
+            <ion-label class="ion-text-wrap">
+              <h2>{{ displayName }}</h2>
+              <p *ngIf="user.job_position">
+                {{ user.job_position }}
+              </p>
+              <p class="text-bold" *ngIf="user.company">
+                {{ user.company }}
+              </p>
+
               <p class="location" *ngIf="user.location">
                 <ion-icon name="location-outline"></ion-icon> {{ user.location }}
+              </p>
+
+              <p *ngIf="user.bio">
+                <span class="text-bold">Información sobre mí</span>
+                <br>
+                {{ user.bio }}
               </p>
             </ion-label>
             <ion-fab-button color="light" size="small" slot="end">
