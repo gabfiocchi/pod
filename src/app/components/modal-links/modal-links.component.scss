@@ -24,13 +24,15 @@
             font-family: Montserrat;
             font-style: normal;
             font-weight: 300;
-            font-size: 14px;
+            font-size: 10px;
             line-height: 17px;
             margin-top: 4px;
 
             color: #000000;
             white-space: nowrap;
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
     }
 }
