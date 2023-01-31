@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   apirest: {
-    base: 'https://admin.mypod.ar/api',
+    base: 'https://api.letspod.co/api',
     // public
 
     // user
